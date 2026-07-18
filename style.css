@@ -36,7 +36,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem 5%;
-    background: var(--nav-bg);
+    background: #ffffff;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
@@ -47,11 +47,11 @@ body {
     font-size: 1.8rem;
     font-weight: 700;
     letter-spacing: 1px;
-    color: #ffffff;
+    color: var(--text-color);
 }
 
 .logo .text-primary {
-    color: #ffffff;
+    color: var(--nav-bg);
 }
 
 .nav-links {
@@ -61,7 +61,7 @@ body {
 }
 
 .nav-links a {
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--nav-bg);
     text-decoration: none;
     font-weight: 500;
     font-size: 1.1rem;
@@ -71,7 +71,7 @@ body {
 }
 
 .nav-links a:hover, .nav-links a.active {
-    color: #ffffff;
+    color: #ea580c;
 }
 
 .nav-links a::after {
@@ -81,7 +81,7 @@ body {
     left: 0;
     width: 0%;
     height: 2px;
-    background: #ffffff;
+    background: #ea580c;
     transition: width 0.3s ease;
 }
 
@@ -93,7 +93,7 @@ body {
     display: none;
     font-size: 1.5rem;
     cursor: pointer;
-    color: #ffffff;
+    color: var(--nav-bg);
 }
 
 /* Main Content Area */
@@ -509,7 +509,7 @@ body {
         left: 0;
         width: 100%;
         flex-direction: column;
-        background: var(--nav-bg);
+        background: #ffffff;
         padding: 0;
         gap: 0;
         border-bottom: 1px solid var(--border-color);
