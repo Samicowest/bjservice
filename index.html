@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BJ Services | Premium WiFi Access</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <span class="text-primary">BJ</span>Services
+        </div>
+        <ul class="nav-links">
+            <li><a href="#" class="tab-link active" data-tab="home">Home</a></li>
+            <li><a href="#" class="tab-link" data-tab="services">Services</a></li>
+            <li><a href="#" class="tab-link" data-tab="about">About Us</a></li>
+            <li><a href="#" class="tab-link" data-tab="contact">Contact Us</a></li>
+        </ul>
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="content-container">
+
+        <!-- Home Tab -->
+        <section id="home" class="tab-content active">
+            <div class="hero-section">
+                <h1>Welcome to BJ Services WiFi</h1>
+                <p>Fast, reliable internet access to get your work done.</p>
+                <div class="wifi-btn-container">
+                    <button id="wifiBtn" class="wifi-pulse-btn">
+                        <i class="fas fa-wifi"></i>
+                    </button>
+                    <span class="wifi-text">Click to Connect</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Tab -->
+        <section id="services" class="tab-content">
+            <div class="services-header">
+                <h2>Our Premium Services</h2>
+                <p>Make payment online without going to the bank!!! Very fast and efficient.</p>
+            </div>
+            
+            <div class="services-grid">
+                <!-- Service Card 1 -->
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-credit-card"></i></div>
+                    <h3>Online Fees Payments</h3>
+                    <ul>
+                        <li>Acceptance/Development Fees</li>
+                        <li>School Fees</li>
+                        <li>Hostel and Medical Fee Payment</li>
+                        <li>Fill Ur Bio-data</li>
+                    </ul>
+                </div>
+                
+                <!-- Service Card 2 -->
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-file-invoice"></i></div>
+                    <h3>All Forms of Remita Payment</h3>
+                    <p>Hassle-free Remita processing for all organizations.</p>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-laptop-file"></i></div>
+                    <h3>Online Application Registration</h3>
+                    <ul>
+                        <li>JUPEB Application Form</li>
+                        <li>Online Pre-degree Application Form</li>
+                        <li>All School Post-UTME</li>
+                    </ul>
+                </div>
+
+                <!-- Service Card 4 -->
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-upload"></i></div>
+                    <h3>O'Level Upload to JAMB CAPS</h3>
+                    <p>Secure and fast upload of your results.</p>
+                </div>
+
+                <!-- Service Card 5 (Printers/Photocopiers info) -->
+                <div class="service-card highlight-card">
+                    <img src="images/printer.png" alt="High Quality Printing" class="card-image">
+                    <h3>Print the Followings:</h3>
+                    <ul>
+                        <li>Original JAMB Result & Admission Letter</li>
+                        <li>FUTO Admission Letter, Confirmation, Form 18 & 19</li>
+                        <li>WAEC, NECO and NABTEB Cards Available</li>
+                    </ul>
+                </div>
+
+                <!-- Service Card 6 -->
+                <div class="service-card highlight-card">
+                    <img src="images/photocopier.png" alt="POS & Transfer" class="card-image">
+                    <h3>POS/Transfer</h3>
+                    <p>Available for payment & withdrawal.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Tab -->
+        <section id="about" class="tab-content">
+            <div class="about-section">
+                <h2>About BJ Services</h2>
+                <p class="subtitle">(Unlimited Grace & Mercy)</p>
+                <div class="about-card">
+                    <i class="fas fa-briefcase about-icon"></i>
+                    <p>BJ Services is a premium business center located in the heart of FUTO, providing top-notch digital and physical administrative services to students, staff, and the general public.</p>
+                    <p>Our mission is to ensure that making payments online and handling your registrations happens without you ever needing to visit the bank.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Us Tab -->
+        <section id="contact" class="tab-content">
+            <div class="contact-section">
+                <h2>Contact Us</h2>
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Location</h3>
+                        <p>Business Center Area, Beside PPRC Building</p>
+                        <p>Old Registry Area, FUTO.</p>
+                    </div>
+                    <div class="contact-card">
+                        <i class="fas fa-phone-alt"></i>
+                        <h3>Phone</h3>
+                        <p>08166221330</p>
+                        <p>08033892455</p>
+                    </div>
+                    <div class="contact-card">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Email</h3>
+                        <p>bjservicesoffice2022@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div class="modal-header">
+                <h2>WiFi Access Login</h2>
+                <p>Enter your details to connect to the internet.</p>
+            </div>
+            <form id="loginForm">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" placeholder="Username or Phone Number" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Access Code / Password" required>
+                </div>
+                <button type="submit" class="submit-btn">Connect Now <i class="fas fa-arrow-right"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
