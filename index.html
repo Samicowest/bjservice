@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <!-- Navbar -->
@@ -25,6 +27,22 @@
             <i class="fas fa-bars"></i>
         </div>
     </nav>
+
+    <!-- Announcement Marquee -->
+    <div
+        style="background-color: #1e293b; padding: 12px 0; border-bottom: 3px solid #ea580c; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <marquee behavior="scroll" direction="left" scrollamount="8" onmouseover="this.stop();"
+            onmouseout="this.start();" style="font-size: 1.1rem; font-weight: 600; font-family: 'Inter', sans-serif;">
+            <span style="color: #38bdf8; margin-right: 80px;"><i class="fas fa-fire" style="margin-right: 8px;"></i>Nerd
+                Registration is Ongoing</span>
+            <span style="color: #4ade80; margin-right: 80px;"><i class="fas fa-graduation-cap"
+                    style="margin-right: 8px;"></i>Jamb Registration</span>
+            <span style="color: #fcd34d; margin-right: 80px;"><i class="fas fa-laptop-code"
+                    style="margin-right: 8px;"></i>Workspace Available</span>
+            <span style="color: #f87171; margin-right: 80px;"><i class="fas fa-money-check-alt"
+                    style="margin-right: 8px;"></i>School Fees Payment</span>
+        </marquee>
+    </div>
 
     <!-- Main Content Area -->
     <main class="content-container">
@@ -49,7 +67,7 @@
                 <h2>Our Premium Services</h2>
                 <p>Make payment online without going to the bank!!! Very fast and efficient.</p>
             </div>
-            
+
             <div class="services-grid">
                 <!-- Service Card 1 -->
                 <div class="service-card">
@@ -62,7 +80,7 @@
                         <li>Fill Ur Bio-data</li>
                     </ul>
                 </div>
-                
+
                 <!-- Service Card 2 -->
                 <div class="service-card">
                     <div class="service-icon"><i class="fas fa-file-invoice"></i></div>
@@ -75,6 +93,8 @@
                     <div class="service-icon"><i class="fas fa-laptop-file"></i></div>
                     <h3>Online Application Registration</h3>
                     <ul>
+                        <li>Nerd Registration</li>
+                        <li>Jamb Registration</li>
                         <li>JUPEB Application Form</li>
                         <li>Online Pre-degree Application Form</li>
                         <li>All School Post-UTME</li>
@@ -115,8 +135,10 @@
                 <p class="subtitle">(Unlimited Grace & Mercy)</p>
                 <div class="about-card">
                     <i class="fas fa-briefcase about-icon"></i>
-                    <p>BJ Services is a premium business center located in the heart of FUTO, providing top-notch digital and physical administrative services to students, staff, and the general public.</p>
-                    <p>Our mission is to ensure that making payments online and handling your registrations happens without you ever needing to visit the bank.</p>
+                    <p>BJ Services is a premium business center located in the heart of FUTO, providing top-notch
+                        digital and physical administrative services to students, staff, and the general public.</p>
+                    <p>Our mission is to ensure that making payments online and handling your registrations happens
+                        without you ever needing to visit the bank.</p>
                 </div>
             </div>
         </section>
@@ -138,6 +160,14 @@
                         <p>08166221330</p>
                         <p>08033892455</p>
                     </div>
+                    <a href="https://wa.me/2348033892455" target="_blank" class="contact-card"
+                        style="text-decoration: none; color: inherit; display: block;">
+                        <i class="fab fa-whatsapp" style="color: #25D366;"></i>
+                        <h3>WhatsApp</h3>
+                        <p>+2348033892455</p>
+                        <p style="font-size: 0.85em; margin-top: 8px; color: #25D366; font-weight: 600;">Click to chat
+                        </p>
+                    </a>
                     <div class="contact-card">
                         <i class="fas fa-envelope"></i>
                         <h3>Email</h3>
@@ -173,4 +203,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
