@@ -31,51 +31,5 @@ document.addEventListener('DOMContentLoaded', () => {
         navLinks.classList.toggle('active');
     });
 
-    // Modal Logic
-    const modal = document.getElementById('loginModal');
-    const wifiBtn = document.getElementById('wifiBtn');
-    const closeBtn = document.querySelector('.close-btn');
-    const loginForm = document.getElementById('loginForm');
-
-    // Open Modal
-    wifiBtn.addEventListener('click', () => {
-        modal.classList.add('show');
-    });
-
-    // Close Modal
-    closeBtn.addEventListener('click', () => {
-        modal.classList.remove('show');
-    });
-
-    // Close Modal on outside click
-    window.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.classList.remove('show');
-        }
-    });
-
-    // Handle Form Submission (Prevent Default for now)
-    loginForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        // Change button state to simulate loading
-        const submitBtn = loginForm.querySelector('.submit-btn');
-        const originalText = submitBtn.innerHTML;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Connecting...';
-        
-        // Simulate network request
-        setTimeout(() => {
-            submitBtn.innerHTML = '<i class="fas fa-check"></i> Connected!';
-            submitBtn.style.backgroundColor = 'var(--accent-green)';
-            
-            // Close modal after brief delay
-            setTimeout(() => {
-                modal.classList.remove('show');
-                // Reset form and button state
-                loginForm.reset();
-                submitBtn.innerHTML = originalText;
-                submitBtn.style.backgroundColor = '';
-            }, 1500);
-        }, 2000);
     });
 });

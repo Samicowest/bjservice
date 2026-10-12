@@ -30,18 +30,18 @@
 
     <!-- Announcement Marquee -->
     <div
-        style="background-color: #1e293b; padding: 12px 0; border-bottom: 3px solid #ea580c; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-        <marquee behavior="scroll" direction="left" scrollamount="8" onmouseover="this.stop();"
-            onmouseout="this.start();" style="font-size: 1.1rem; font-weight: 600; font-family: 'Inter', sans-serif;">
-            <span style="color: #38bdf8; margin-right: 80px;"><i class="fas fa-fire" style="margin-right: 8px;"></i>Nerd
+        style="background-color: #ffffff; padding: 11px 0; border-bottom: 1px solid #e2e8f0; border-top: 1px solid #f1f5f9; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+        <marquee behavior="scroll" direction="left" scrollamount="3" onmouseover="this.stop();"
+            onmouseout="this.start();" style="font-size: 0.95rem; font-weight: 600; font-family: 'Inter', sans-serif;">
+            <span style="color: #0284c7; margin-right: 80px;"><i class="fas fa-fire" style="margin-right: 8px;"></i>Nerd
                 Registration </span>
-            <span style="color: #4ade80; margin-right: 80px;"><i class="fas fa-graduation-cap"
+            <span style="color: #059669; margin-right: 80px;"><i class="fas fa-graduation-cap"
                     style="margin-right: 8px;"></i>Accredited NYSC Registration Center</span>
-            <span style="color: #fcd34d; margin-right: 80px;"><i class="fas fa-laptop-code"
+            <span style="color: #d97706; margin-right: 80px;"><i class="fas fa-laptop-code"
                     style="margin-right: 8px;"></i>Workspace Available</span>
-            <span style="color: #f87171; margin-right: 80px;"><i class="fas fa-money-check-alt"
+            <span style="color: #dc2626; margin-right: 80px;"><i class="fas fa-money-check-alt"
                     style="margin-right: 8px;"></i>School Fees Payment</span>
-            <span style="color: #c084fc; margin-right: 80px;"><i class="fas fa-id-card"
+            <span style="color: #7c3aed; margin-right: 80px;"><i class="fas fa-id-card"
                     style="margin-right: 8px;"></i>NIMC ID-CARD Printing</span>
         </marquee>
     </div>
@@ -51,14 +51,218 @@
 
         <!-- Home Tab -->
         <section id="home" class="tab-content active">
-            <div class="hero-section">
-                <h1>Welcome to BJ Services WiFi</h1>
-                <p>Fast, reliable internet access to get your work done.</p>
-                <div class="wifi-btn-container">
-                    <button id="wifiBtn" class="wifi-pulse-btn">
-                        <i class="fas fa-wifi"></i>
-                    </button>
-                    <span class="wifi-text">Click to Connect</span>
+
+            <!-- Live Campus Developments Alert Banner -->
+            <div
+                style="background: #ffffff; border: 1px solid var(--border-color); border-radius: 16px; padding: 1.25rem 1.5rem; margin-bottom: 2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem; flex-wrap: wrap; gap: 0.5rem;">
+                    <span
+                        style="background: #fff7ed; color: #ea580c; border: 1px solid #ffedd5; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; display: inline-flex; align-items: center; gap: 5px;">
+                        <i class="fas fa-fire"></i> LATEST CAMPUS BULLETINS
+                    </span>
+                    <span style="font-size: 0.78rem; color: var(--text-muted); font-weight: 500;">
+                        Verified BJ Services Campus Desk Notices • FUTO Old Registry
+                    </span>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0.85rem;">
+                    <div
+                        style="background: var(--bg-color); padding: 0.85rem 1rem; border-radius: 10px; border-left: 3px solid #0284c7;">
+                        <span style="font-size: 0.7rem; font-weight: 700; color: #0284c7; text-transform: uppercase;">🎓
+                            NYSC MOBILIZATION</span>
+                        <div style="font-weight: 700; font-size: 0.88rem; color: var(--text-color); margin: 2px 0;">FUTO
+                            Senate List Uploaded</div>
+                        <p style="font-size: 0.78rem; color: var(--text-muted); margin: 0;">Green Card biometric capture
+                            & kit sizing now ongoing.</p>
+                    </div>
+
+                    <div
+                        style="background: var(--bg-color); padding: 0.85rem 1rem; border-radius: 10px; border-left: 3px solid #ea580c;">
+                        <span style="font-size: 0.7rem; font-weight: 700; color: #ea580c; text-transform: uppercase;">⚡
+                            2025/2026 SCHOOL FEES</span>
+                        <div style="font-weight: 700; font-size: 0.88rem; color: var(--text-color); margin: 2px 0;">
+                            Remita Clearance Active</div>
+                        <p style="font-size: 0.78rem; color: var(--text-muted); margin: 0;">Pay acceptance & school fees
+                            without bank queues.</p>
+                    </div>
+
+                    <div
+                        style="background: var(--bg-color); padding: 0.85rem 1rem; border-radius: 10px; border-left: 3px solid #059669;">
+                        <span style="font-size: 0.7rem; font-weight: 700; color: #059669; text-transform: uppercase;">🪪
+                            SMART PLASTIC ID CARDS</span>
+                        <div style="font-weight: 700; font-size: 0.88rem; color: var(--text-color); margin: 2px 0;">
+                            Instant Waterproof Printing</div>
+                        <p style="font-size: 0.78rem; color: var(--text-muted); margin: 0;">Digital PVC machine issues
+                            verified QR smart cards.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-section" style="padding: 2.5rem 0 3.5rem;">
+                <h1>Welcome to BJ Services</h1>
+                <p style="max-width: 650px; margin-bottom: 2rem;">
+                    Your trusted FUTO Digital Hub — High-Speed 24hr Campus WiFi, Online School Fees & Remita Payments,
+                    JAMB/NYSC Registration, and Instant NIMC Smart Card Printing.
+                </p>
+
+                <!-- Urgent Deadlines Radar Section -->
+                <div style="width: 100%; text-align: left; margin-bottom: 3.5rem;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 0.5rem;">
+                        <div>
+                            <span
+                                style="font-size: 0.78rem; font-weight: 700; color: #ea580c; text-transform: uppercase; letter-spacing: 0.05em;">
+                                <i class="fas fa-clock" style="margin-right: 4px;"></i> TIME-SENSITIVE PORTAL CUTOFFS
+                            </span>
+                            <h2 style="font-size: 1.6rem; font-weight: 800; color: var(--text-color); margin-top: 2px;">
+                                Approaching Academic Deadlines
+                            </h2>
+                        </div>
+                        <span style="font-size: 0.85rem; color: var(--text-muted);">Avoid late penalty surcharges</span>
+                    </div>
+
+                    <div
+                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem;">
+                        <!-- Deadline 1 -->
+                        <div class="service-card" style="padding: 1.5rem; border-top: 3px solid #dc2626;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem;">
+                                <span
+                                    style="background: #fef2f2; color: #dc2626; font-size: 0.7rem; font-weight: 800; padding: 2px 6px; border-radius: 4px;">CLOSING
+                                    IN 5 DAYS</span>
+                                <span style="font-size: 0.75rem; color: var(--text-muted);">Oct 15, 2025</span>
+                            </div>
+                            <h3 style="font-size: 1.1rem; margin-bottom: 0.4rem;">NYSC 2025 Batch 'A' Registration</h3>
+                            <p style="font-size: 0.82rem; margin-bottom: 1rem;">Senate list check, biometric capture,
+                                kit sizing & Green Card verification.</p>
+                            <a href="#" class="tab-link" data-tab="services"
+                                style="color: #0284c7; font-weight: 700; font-size: 0.85rem; text-decoration: none;">
+                                Register at BJ Services →
+                            </a>
+                        </div>
+
+                        <!-- Deadline 2 -->
+                        <div class="service-card" style="padding: 1.5rem; border-top: 3px solid #0284c7;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem;">
+                                <span
+                                    style="background: #eff6ff; color: #0284c7; font-size: 0.7rem; font-weight: 800; padding: 2px 6px; border-radius: 4px;">CRUCIAL
+                                    FOR ADMISSION</span>
+                                <span style="font-size: 0.75rem; color: var(--text-muted);">Oct 22, 2025</span>
+                            </div>
+                            <h3 style="font-size: 1.1rem; margin-bottom: 0.4rem;">JAMB CAPS O'Level Upload</h3>
+                            <p style="font-size: 0.82rem; margin-bottom: 1rem;">Direct CAPS central verification.
+                                Statement of results upload for Post-UTME.</p>
+                            <a href="#" class="tab-link" data-tab="services"
+                                style="color: #0284c7; font-weight: 700; font-size: 0.85rem; text-decoration: none;">
+                                Upload O'Levels Now →
+                            </a>
+                        </div>
+
+                        <!-- Deadline 3 -->
+                        <div class="service-card" style="padding: 1.5rem; border-top: 3px solid #ea580c;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem;">
+                                <span
+                                    style="background: #fffbeb; color: #d97706; font-size: 0.7rem; font-weight: 800; padding: 2px 6px; border-radius: 4px;">AVOID
+                                    ₦10K PENALTY</span>
+                                <span style="font-size: 0.75rem; color: var(--text-muted);">Oct 28, 2025</span>
+                            </div>
+                            <h3 style="font-size: 1.1rem; margin-bottom: 0.4rem;">School Fees & Course Reg</h3>
+                            <p style="font-size: 0.82rem; margin-bottom: 1rem;">FUTO school fees Remita invoice
+                                generation and portal receipt stamping.</p>
+                            <a href="#" class="tab-link" data-tab="services"
+                                style="color: #0284c7; font-weight: 700; font-size: 0.85rem; text-decoration: none;">
+                                Pay Remita Online →
+                            </a>
+                        </div>
+
+                        <!-- Deadline 4 -->
+                        <div class="service-card" style="padding: 1.5rem; border-top: 3px solid #7c3aed;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem;">
+                                <span
+                                    style="background: #f5f3ff; color: #7c3aed; font-size: 0.7rem; font-weight: 800; padding: 2px 6px; border-radius: 4px;">LIMITED
+                                    SLOTS</span>
+                                <span style="font-size: 0.75rem; color: var(--text-muted);">Nov 05, 2025</span>
+                            </div>
+                            <h3 style="font-size: 1.1rem; margin-bottom: 0.4rem;">Supplementary Admission</h3>
+                            <p style="font-size: 0.82rem; margin-bottom: 1rem;">FUTO supplementary course selection,
+                                JAMB number filing & portal receipt.</p>
+                            <a href="#" class="tab-link" data-tab="services"
+                                style="color: #0284c7; font-weight: 700; font-size: 0.85rem; text-decoration: none;">
+                                Apply Supplementary →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Easy Quick-Access Service Cards -->
+                <div style="width: 100%; text-align: left;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.5rem;">
+                        <div>
+                            <span
+                                style="font-size: 0.78rem; font-weight: 700; color: var(--primary-color); text-transform: uppercase; letter-spacing: 0.05em;">CORE
+                                CAPABILITIES</span>
+                            <h2 style="font-size: 1.6rem; font-weight: 800; color: var(--text-color); margin-top: 2px;">
+                                What BJ Services Renders</h2>
+                        </div>
+                        <a href="#" class="tab-link" data-tab="services"
+                            style="color: var(--primary-color); font-weight: 600; font-size: 0.9rem; text-decoration: none;">View
+                            All Services →</a>
+                    </div>
+
+                    <div
+                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem;">
+                        <!-- Quick Card 1 -->
+                        <div class="service-card" style="padding: 1.5rem;">
+                            <div class="service-icon" style="font-size: 2rem; margin-bottom: 1rem;"><i
+                                    class="fas fa-credit-card"></i></div>
+                            <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem;">Online Fees & Remita</h3>
+                            <p style="font-size: 0.88rem; margin-bottom: 1.25rem;">Pay School Fees, Acceptance,
+                                Medicals, and any Remita RRR invoice without bank queues.</p>
+                            <a href="#" class="tab-link" data-tab="services"
+                                style="color: var(--primary-color); font-weight: 700; font-size: 0.85rem; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+                                <span>Pay Online Now</span> <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+
+                        <!-- Quick Card 2 -->
+                        <div class="service-card" style="padding: 1.5rem;">
+                            <div class="service-icon" style="font-size: 2rem; margin-bottom: 1rem; color: #059669;"><i
+                                    class="fas fa-graduation-cap"></i></div>
+                            <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem;">NYSC & JAMB CAPS</h3>
+                            <p style="font-size: 0.88rem; margin-bottom: 1.25rem;">Accredited center for NYSC
+                                Mobilization, Post-UTME registration, and O'Level CAPS uploads.</p>
+                            <a href="#" class="tab-link" data-tab="services"
+                                style="color: #059669; font-weight: 700; font-size: 0.85rem; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+                                <span>View Registrations</span> <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+
+                        <!-- Quick Card 3 -->
+                        <div class="service-card" style="padding: 1.5rem;">
+                            <div class="service-icon" style="font-size: 2rem; margin-bottom: 1rem; color: #7c3aed;"><i
+                                    class="fas fa-id-card"></i></div>
+                            <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem;">NIMC Plastic Card & Print</h3>
+                            <p style="font-size: 0.88rem; margin-bottom: 1.25rem;">Smart plastic NIMC card printing,
+                                FUTO Admission Letters, Form 18/19, and WAEC/NECO scratch cards.</p>
+                            <a href="#" class="tab-link" data-tab="services"
+                                style="color: #7c3aed; font-weight: 700; font-size: 0.85rem; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+                                <span>See Printing Desk</span> <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Campus Location Banner -->
+                    <div
+                        style="margin-top: 2rem; background: #ffffff; border: 1px solid var(--border-color); padding: 1rem 1.5rem; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; font-size: 0.85rem;">
+                        <span style="color: var(--text-color);">
+                            📍 <strong>Walk-in Center:</strong> Old Registry Area, Beside PPRC Building, FUTO
+                        </span>
+                        <a href="https://wa.me/2348033892455" target="_blank"
+                            style="color: #16a34a; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
+                            <i class="fab fa-whatsapp"></i> Chat on WhatsApp (08033892455) →
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -182,28 +386,6 @@
         </section>
 
     </main>
-
-    <!-- Login Modal -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <div class="modal-header">
-                <h2>WiFi Access Login</h2>
-                <p>Enter your details to connect to the internet.</p>
-            </div>
-            <form id="loginForm">
-                <div class="input-group">
-                    <i class="fas fa-user"></i>
-                    <input type="text" placeholder="Username or Phone Number" required>
-                </div>
-                <div class="input-group">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" placeholder="Access Code / Password" required>
-                </div>
-                <button type="submit" class="submit-btn">Connect Now <i class="fas fa-arrow-right"></i></button>
-            </form>
-        </div>
-    </div>
 
     <script src="script.js"></script>
 </body>
