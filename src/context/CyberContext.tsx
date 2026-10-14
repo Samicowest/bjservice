@@ -204,10 +204,6 @@ export function CyberProvider({ children }: { children: React.ReactNode }) {
           return {
             ...DEFAULT_SITE_SETTINGS,
             ...parsed,
-            urgentBulletin: {
-              ...DEFAULT_SITE_SETTINGS.urgentBulletin,
-              ...(parsed.urgentBulletin || {})
-            },
             bankDetails: {
               ...DEFAULT_SITE_SETTINGS.bankDetails,
               ...(parsed.bankDetails || {})
@@ -234,7 +230,6 @@ export function CyberProvider({ children }: { children: React.ReactNode }) {
       const updated: SiteSettings = {
         ...prev,
         ...updates,
-        urgentBulletin: updates.urgentBulletin ? { ...prev.urgentBulletin, ...updates.urgentBulletin } : prev.urgentBulletin,
         bankDetails: updates.bankDetails ? { ...prev.bankDetails, ...updates.bankDetails } : prev.bankDetails,
         wifiRates: updates.wifiRates ? { ...prev.wifiRates, ...updates.wifiRates } : prev.wifiRates,
         contact: updates.contact ? { ...prev.contact, ...updates.contact } : prev.contact

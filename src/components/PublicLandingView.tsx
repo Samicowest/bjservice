@@ -25,13 +25,11 @@ import {
   Award,
   ChevronRight,
   Send,
-  Building,
-  Printer
+  Building
 } from 'lucide-react';
 
 export default function PublicLandingView() {
   const { setActiveModal, setSelectedServiceForOrder, services, siteSettings } = useCyber();
-  const [activeCatalogCategory, setActiveCatalogCategory] = useState('All');
   const [catalogSearch, setCatalogSearch] = useState('');
 
   // Slider state
@@ -105,18 +103,14 @@ export default function PublicLandingView() {
   };
 
   // Filter catalog services
-  const categoryConfigs = [
-    { name: 'All', icon: Sparkles, count: services.length },
-    { name: 'Fees & Payments', icon: CreditCard, count: services.filter((s) => s.category === 'Fees & Payments').length },
-    { name: 'Admissions & Portals', icon: GraduationCap, count: services.filter((s) => s.category === 'Admissions & Portals').length },
-    { name: 'Printing & IDs', icon: Printer, count: services.filter((s) => s.category === 'Printing & IDs').length },
-    { name: 'Remita', icon: FileText, count: services.filter((s) => s.category === 'Remita').length }
-  ];
   const filteredServices = services.filter((s) => {
-    const matchesCat = activeCatalogCategory === 'All' || s.category === activeCatalogCategory;
-    const matchesQuery = s.name.toLowerCase().includes(catalogSearch.toLowerCase()) ||
-                         s.shortDesc.toLowerCase().includes(catalogSearch.toLowerCase());
-    return matchesCat && matchesQuery;
+    const q = catalogSearch.toLowerCase().trim();
+    if (!q) return true;
+    return (
+      s.name.toLowerCase().includes(q) ||
+      s.shortDesc.toLowerCase().includes(q) ||
+      s.category.toLowerCase().includes(q)
+    );
   });
 
   return (
@@ -385,120 +379,7 @@ export default function PublicLandingView() {
         </div>
       </section>
 
-      {/* 2.5 LIVE CAMPUS URGENT BULLETIN BANNER (Managed by Master Admin) */}
-      {siteSettings?.urgentBulletin?.active && (
-        <section style={{ marginBottom: 'clamp(2rem, 4vw, 3rem)' }}>
-          <div
-            className="glass-card"
-            style={{
-              padding: 'clamp(1rem, 2.5vw, 1.5rem) clamp(1.25rem, 3vw, 2rem)',
-              borderRadius: '20px',
-              background:
-                siteSettings.urgentBulletin.type === 'alert'
-                  ? 'linear-gradient(135deg, #fef2f2 0%, #ffffff 100%)'
-                  : siteSettings.urgentBulletin.type === 'warning'
-                  ? 'linear-gradient(135deg, #fffbeb 0%, #ffffff 100%)'
-                  : siteSettings.urgentBulletin.type === 'success'
-                  ? 'linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%)'
-                  : 'linear-gradient(135deg, #eff6ff 0%, #ffffff 100%)',
-              border: `1.5px solid ${
-                siteSettings.urgentBulletin.type === 'alert'
-                  ? '#fca5a5'
-                  : siteSettings.urgentBulletin.type === 'warning'
-                  ? '#fcd34d'
-                  : siteSettings.urgentBulletin.type === 'success'
-                  ? '#86efac'
-                  : '#93c5fd'
-              }`,
-              boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              gap: '1.25rem',
-              flexWrap: 'wrap'
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flex: '1 1 300px' }}>
-              <div
-                style={{
-                  width: '46px',
-                  height: '46px',
-                  borderRadius: '12px',
-                  background:
-                    siteSettings.urgentBulletin.type === 'alert'
-                      ? '#fee2e2'
-                      : siteSettings.urgentBulletin.type === 'warning'
-                      ? '#fef3c7'
-                      : siteSettings.urgentBulletin.type === 'success'
-                      ? '#dcfce7'
-                      : '#dbeafe',
-                  color:
-                    siteSettings.urgentBulletin.type === 'alert'
-                      ? '#dc2626'
-                      : siteSettings.urgentBulletin.type === 'warning'
-                      ? '#d97706'
-                      : siteSettings.urgentBulletin.type === 'success'
-                      ? '#16a34a'
-                      : '#0284c7',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexShrink: 0
-                }}
-              >
-                <AlertTriangle size={24} />
-              </div>
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.2rem', flexWrap: 'wrap' }}>
-                  <span
-                    style={{
-                      fontSize: '0.68rem',
-                      fontWeight: 800,
-                      padding: '0.15rem 0.5rem',
-                      borderRadius: '9999px',
-                      background:
-                        siteSettings.urgentBulletin.type === 'alert'
-                          ? '#fca5a5'
-                          : siteSettings.urgentBulletin.type === 'warning'
-                          ? '#fde68a'
-                          : siteSettings.urgentBulletin.type === 'success'
-                          ? '#bbf7d0'
-                          : '#bfdbfe',
-                      color:
-                        siteSettings.urgentBulletin.type === 'alert'
-                          ? '#991b1b'
-                          : siteSettings.urgentBulletin.type === 'warning'
-                          ? '#92400e'
-                          : siteSettings.urgentBulletin.type === 'success'
-                          ? '#166534'
-                          : '#1e40af'
-                    }}
-                  >
-                    {siteSettings.urgentBulletin.badge || 'CAMPUS BULLETIN'}
-                  </span>
-                  <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-main)', margin: 0 }}>
-                    {siteSettings.urgentBulletin.title}
-                  </h3>
-                </div>
-                <p style={{ fontSize: '0.86rem', color: 'var(--text-muted)', margin: 0, lineHeight: 1.5 }}>
-                  {siteSettings.urgentBulletin.message}
-                </p>
-              </div>
-            </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexShrink: 0 }}>
-              <Link
-                href="/services"
-                className="btn btn-primary btn-sm"
-                style={{ borderRadius: '9999px', padding: '0.55rem 1.15rem', fontSize: '0.82rem', fontWeight: 700, textDecoration: 'none' }}
-              >
-                <span>Take Action Now</span>
-                <ArrowRight size={14} />
-              </Link>
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* 3. URGENT DEADLINES & UPCOMING TIMELINES RADAR */}
       <section id="deadlines" style={{ marginBottom: '4rem' }}>
@@ -1272,73 +1153,7 @@ export default function PublicLandingView() {
           </div>
         </div>
 
-        {/* Floating Category Pills Rail */}
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            gap: '0.65rem',
-            padding: '0.5rem 0.2rem 0.85rem',
-            marginBottom: '1.75rem',
-            width: '100%'
-          }}
-        >
-          {categoryConfigs.map((cat) => {
-            const isActive = activeCatalogCategory === cat.name;
-            const IconComponent = cat.icon;
-            return (
-              <button
-                key={cat.name}
-                onClick={() => setActiveCatalogCategory(cat.name)}
-                className={`category-pill ${isActive ? 'active' : ''}`}
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '0.55rem',
-                  padding: '0.65rem 1.4rem',
-                  minHeight: '44px',
-                  borderRadius: '9999px',
-                  fontSize: '0.88rem',
-                  fontWeight: 600,
-                  whiteSpace: 'nowrap',
-                  cursor: 'pointer',
-                  border: isActive ? '1px solid #0284c7' : '1px solid #e2e8f0',
-                  background: isActive
-                    ? 'linear-gradient(135deg, #0284c7 0%, #0369a1 100%)'
-                    : '#ffffff',
-                  color: isActive ? '#ffffff' : '#334155',
-                  boxShadow: isActive
-                    ? '0 4px 14px rgba(2, 132, 199, 0.35)'
-                    : '0 2px 6px rgba(0, 0, 0, 0.04)',
-                  transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
-                  flexShrink: 0,
-                  outline: 'none'
-                }}
-              >
-                <IconComponent size={16} color={isActive ? '#ffffff' : '#0284c7'} />
-                <span>{cat.name}</span>
-                <span
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: '0.12rem 0.55rem',
-                    borderRadius: '9999px',
-                    fontSize: '0.74rem',
-                    fontWeight: 700,
-                    background: isActive ? 'rgba(255, 255, 255, 0.25)' : '#f1f5f9',
-                    color: isActive ? '#ffffff' : '#64748b',
-                    marginLeft: '0.15rem'
-                  }}
-                >
-                  {cat.count}
-                </span>
-              </button>
-            );
-          })}
-        </div>
+
 
         {/* Services Cards Grid */}
         <div

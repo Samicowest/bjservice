@@ -22,8 +22,7 @@ import {
   ChevronDown,
   LogOut,
   UserCheck,
-  Megaphone,
-  AlertTriangle
+  Megaphone
 } from 'lucide-react';
 
 export default function Navbar() {
@@ -41,7 +40,6 @@ export default function Navbar() {
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
-  const [bulletinDismissed, setBulletinDismissed] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Close profile dropdown on outside click
@@ -81,68 +79,6 @@ export default function Navbar() {
 
   return (
     <header style={{ position: 'sticky', top: 0, zIndex: 100, backgroundColor: 'var(--bg-surface)', boxShadow: '0 2px 10px rgba(0,0,0,0.04)' }}>
-      {/* 0. Live Campus Urgent Bulletin Banner */}
-      {siteSettings?.urgentBulletin?.active && !bulletinDismissed && (
-        <div
-          style={{
-            background:
-              siteSettings.urgentBulletin.type === 'alert'
-                ? 'linear-gradient(90deg, #991b1b 0%, #dc2626 100%)'
-                : siteSettings.urgentBulletin.type === 'warning'
-                ? 'linear-gradient(90deg, #b45309 0%, #d97706 100%)'
-                : siteSettings.urgentBulletin.type === 'success'
-                ? 'linear-gradient(90deg, #15803d 0%, #16a34a 100%)'
-                : 'linear-gradient(90deg, #1e40af 0%, #2563eb 100%)',
-            color: '#ffffff',
-            padding: '0.45rem clamp(0.75rem, 3vw, 1.5rem)',
-            fontSize: '0.78rem',
-            fontWeight: 600,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '0.75rem',
-            zIndex: 101,
-            position: 'relative'
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flex: 1, minWidth: 0 }}>
-            <span
-              style={{
-                fontSize: '0.65rem',
-                fontWeight: 800,
-                background: 'rgba(255,255,255,0.25)',
-                padding: '0.15rem 0.45rem',
-                borderRadius: '4px',
-                letterSpacing: '0.04em',
-                flexShrink: 0
-              }}
-            >
-              {siteSettings.urgentBulletin.badge || 'BULLETIN'}
-            </span>
-            <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-              <strong>{siteSettings.urgentBulletin.title}:</strong> {siteSettings.urgentBulletin.message}
-            </div>
-          </div>
-          <button
-            onClick={() => setBulletinDismissed(true)}
-            style={{
-              background: 'transparent',
-              border: 'none',
-              color: 'rgba(255,255,255,0.85)',
-              cursor: 'pointer',
-              padding: '2px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexShrink: 0
-            }}
-            aria-label="Dismiss bulletin"
-          >
-            <X size={15} />
-          </button>
-        </div>
-      )}
-
       {/* Main Single Navigation Bar */}
       <div
         className="container"
@@ -201,9 +137,6 @@ export default function Navbar() {
                 FUTO HUB
               </span>
             </div>
-            <p style={{ fontSize: '0.72rem', color: 'var(--text-dim)', margin: 0 }}>
-              Cybercafe & Academic Pipeline
-            </p>
           </div>
         </Link>
 
@@ -296,28 +229,34 @@ export default function Navbar() {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '0.5rem',
+                  justifyContent: 'center',
                   background: 'var(--bg-inset)',
-                  border: '1px solid var(--border-subtle)',
-                  borderRadius: '10px',
-                  padding: '0.35rem 0.65rem',
+                  border: '1.5px solid var(--border-subtle)',
+                  borderRadius: '50%',
+                  width: '38px',
+                  height: '38px',
+                  padding: 0,
                   cursor: 'pointer',
                   color: 'var(--text-main)',
-                  fontSize: '0.8rem',
-                  transition: 'all 0.15s ease'
+                  transition: 'all 0.15s ease',
+                  flexShrink: 0,
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.06)'
                 }}
-                title="Account menu & portal"
+                className="hover:border-[var(--primary)]"
+                title={`${currentUser.name} (${currentUser.badge})`}
+                aria-label="User account menu"
               >
-                <span style={{ fontSize: '1.15rem' }}>{currentUser.avatar}</span>
-                <div style={{ textAlign: 'left', display: 'flex', flexDirection: 'column' }}>
-                  <span style={{ fontWeight: 700, fontSize: '0.78rem', color: 'var(--text-main)', whiteSpace: 'nowrap' }}>
-                    {currentUser.name.split(' ')[0]}
+                {currentUser.avatar?.startsWith('http') || currentUser.avatar?.startsWith('/') ? (
+                  <img
+                    src={currentUser.avatar}
+                    alt={currentUser.name}
+                    style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }}
+                  />
+                ) : (
+                  <span style={{ fontSize: '1.2rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    {currentUser.avatar || '👤'}
                   </span>
-                  <span style={{ fontSize: '0.65rem', color: 'var(--primary)', fontWeight: 600 }}>
-                    {currentUser.badge}
-                  </span>
-                </div>
-                <ChevronDown size={14} color="var(--text-muted)" style={{ transform: profileDropdownOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+                )}
               </button>
 
               {/* Profile Dropdown Menu */}
@@ -549,7 +488,7 @@ export default function Navbar() {
             color: 'var(--text-muted)'
           }}
         >
-          <div className="marquee-track" style={{ display: 'inline-block', animation: 'marqueeScroll 55s linear infinite' }}>
+          <div className="marquee-track" style={{ display: 'inline-block', animation: 'marqueeScroll 150s linear infinite' }}>
             {siteSettings.announcementTicker && (
               <span style={{ color: '#0284c7', marginRight: '3.5rem', display: 'inline-flex', alignItems: 'center', gap: '0.45rem', fontWeight: 700 }}>
                 <Megaphone size={14} color="var(--primary)" />
@@ -579,15 +518,20 @@ export default function Navbar() {
       )}
 
       <style jsx>{`
-        .marquee-track:hover {
+        .marquee-track {
+          will-change: transform;
+        }
+        .marquee-track:hover,
+        .marquee-track:active,
+        .marquee-track:focus-within {
           animation-play-state: paused;
         }
         @keyframes marqueeScroll {
           0% {
-            transform: translateX(100%);
+            transform: translate3d(100%, 0, 0);
           }
           100% {
-            transform: translateX(-100%);
+            transform: translate3d(-100%, 0, 0);
           }
         }
         @media (max-width: 900px) {

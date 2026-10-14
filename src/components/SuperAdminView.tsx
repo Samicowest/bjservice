@@ -163,153 +163,63 @@ export default function SuperAdminView() {
   return (
     <div style={{ padding: '2rem 0 4rem' }}>
       {/* Top Navigation Tabs */}
-      <div
-        style={{
-          display: 'flex',
-          gap: '0.5rem',
-          background: 'var(--bg-card)',
-          padding: '6px',
-          borderRadius: '16px',
-          border: '1px solid var(--border-subtle)',
-          boxShadow: 'var(--shadow-sm)',
-          marginBottom: '2rem',
-          flexWrap: 'wrap'
-        }}
-      >
+      {/* Top Navigation Tabs */}
+      <div className="superadmin-tabs-bar">
         <button
           type="button"
           onClick={() => setActiveTab('users')}
-          style={{
-            flex: '1 1 180px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '0.6rem',
-            padding: '0.85rem 1.25rem',
-            borderRadius: '12px',
-            fontSize: '0.9rem',
-            fontWeight: 700,
-            border: 'none',
-            cursor: 'pointer',
-            background: activeTab === 'users' ? 'var(--primary)' : 'transparent',
-            color: activeTab === 'users' ? '#ffffff' : 'var(--text-muted)',
-            boxShadow: activeTab === 'users' ? 'var(--shadow-sm)' : 'none',
-            transition: 'all 0.15s ease'
-          }}
+          className={`superadmin-tab-btn ${activeTab === 'users' ? 'active' : ''}`}
         >
-          <Users size={18} />
-          <span>User Management & RBAC</span>
-          <span
-            style={{
-              fontSize: '0.72rem',
-              padding: '2px 8px',
-              borderRadius: '999px',
-              background: activeTab === 'users' ? 'rgba(255,255,255,0.25)' : 'var(--bg-inset)',
-              color: activeTab === 'users' ? '#ffffff' : 'var(--text-main)',
-              fontWeight: 800
-            }}
-          >
-            {userProfiles.length}
-          </span>
+          <Users size={18} className="tab-icon" />
+          <div className="tab-label-group">
+            <span className="tab-label-desktop">User Management & RBAC</span>
+            <span className="tab-label-mobile">Users</span>
+            <span className="tab-badge">
+              {userProfiles.length}
+            </span>
+          </div>
         </button>
 
         <button
           type="button"
           onClick={() => setActiveTab('financials')}
-          style={{
-            flex: '1 1 180px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '0.6rem',
-            padding: '0.85rem 1.25rem',
-            borderRadius: '12px',
-            fontSize: '0.9rem',
-            fontWeight: 700,
-            border: 'none',
-            cursor: 'pointer',
-            background: activeTab === 'financials' ? 'var(--primary)' : 'transparent',
-            color: activeTab === 'financials' ? '#ffffff' : 'var(--text-muted)',
-            boxShadow: activeTab === 'financials' ? 'var(--shadow-sm)' : 'none',
-            transition: 'all 0.15s ease'
-          }}
+          className={`superadmin-tab-btn ${activeTab === 'financials' ? 'active' : ''}`}
         >
-          <DollarSign size={18} />
-          <span>Financial Analytics</span>
+          <DollarSign size={18} className="tab-icon" />
+          <div className="tab-label-group">
+            <span className="tab-label-desktop">Financial Analytics</span>
+            <span className="tab-label-mobile">Finance</span>
+          </div>
         </button>
 
         <button
           type="button"
           onClick={() => setActiveTab('forms')}
-          style={{
-            flex: '1 1 180px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '0.6rem',
-            padding: '0.85rem 1.25rem',
-            borderRadius: '12px',
-            fontSize: '0.9rem',
-            fontWeight: 700,
-            border: 'none',
-            cursor: 'pointer',
-            background: activeTab === 'forms' ? 'var(--primary)' : 'transparent',
-            color: activeTab === 'forms' ? '#ffffff' : 'var(--text-muted)',
-            boxShadow: activeTab === 'forms' ? 'var(--shadow-sm)' : 'none',
-            transition: 'all 0.15s ease'
-          }}
+          className={`superadmin-tab-btn ${activeTab === 'forms' ? 'active' : ''}`}
         >
-          <Layers size={18} />
-          <span>Services & Forms Studio</span>
-          <span
-            style={{
-              fontSize: '0.72rem',
-              padding: '2px 8px',
-              borderRadius: '999px',
-              background: activeTab === 'forms' ? 'rgba(255,255,255,0.25)' : 'var(--bg-inset)',
-              color: activeTab === 'forms' ? '#ffffff' : 'var(--text-main)',
-              fontWeight: 800
-            }}
-          >
-            {services.length}
-          </span>
+          <Layers size={18} className="tab-icon" />
+          <div className="tab-label-group">
+            <span className="tab-label-desktop">Services & Forms Studio</span>
+            <span className="tab-label-mobile">Services</span>
+            <span className="tab-badge">
+              {services.length}
+            </span>
+          </div>
         </button>
 
         <button
           type="button"
           onClick={() => setActiveTab('audit')}
-          style={{
-            flex: '1 1 180px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '0.6rem',
-            padding: '0.85rem 1.25rem',
-            borderRadius: '12px',
-            fontSize: '0.9rem',
-            fontWeight: 700,
-            border: 'none',
-            cursor: 'pointer',
-            background: activeTab === 'audit' ? 'var(--primary)' : 'transparent',
-            color: activeTab === 'audit' ? '#ffffff' : 'var(--text-muted)',
-            boxShadow: activeTab === 'audit' ? 'var(--shadow-sm)' : 'none',
-            transition: 'all 0.15s ease'
-          }}
+          className={`superadmin-tab-btn ${activeTab === 'audit' ? 'active' : ''}`}
         >
-          <Shield size={18} />
-          <span>System Audit Trail</span>
-          <span
-            style={{
-              fontSize: '0.72rem',
-              padding: '2px 8px',
-              borderRadius: '999px',
-              background: activeTab === 'audit' ? 'rgba(255,255,255,0.25)' : 'var(--bg-inset)',
-              color: activeTab === 'audit' ? '#ffffff' : 'var(--text-main)',
-              fontWeight: 800
-            }}
-          >
-            {allAuditEvents.length}
-          </span>
+          <Shield size={18} className="tab-icon" />
+          <div className="tab-label-group">
+            <span className="tab-label-desktop">System Audit Trail</span>
+            <span className="tab-label-mobile">Audit</span>
+            <span className="tab-badge">
+              {allAuditEvents.length}
+            </span>
+          </div>
         </button>
       </div>
 
@@ -648,55 +558,28 @@ export default function SuperAdminView() {
       {activeTab === 'financials' && (
         <section>
           {/* Executive Header */}
-          <div
-            className="glass-card"
-            style={{
-              padding: '2rem',
-              marginBottom: '2.5rem',
-              background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(14, 165, 233, 0.06) 100%)',
-              border: '1px solid var(--border-subtle)',
-              borderRadius: '20px'
-            }}
-          >
-            <h1 style={{ fontSize: '1.9rem', fontWeight: 800, color: 'var(--text-main)', margin: '0 0 1.25rem' }}>
+          <div className="glass-card financial-executive-header">
+            <h1 className="financial-heading">
               BJ Services Financial & Revenue Intelligence
             </h1>
 
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
               {/* Gross Revenue for the Week */}
-              <div
-                style={{
-                  flex: '1 1 240px',
-                  background: 'var(--bg-card)',
-                  padding: '1.15rem 1.5rem',
-                  borderRadius: '14px',
-                  border: '1px solid var(--border-subtle)',
-                  boxShadow: 'var(--shadow-sm)'
-                }}
-              >
+              <div className="financial-stat-box">
                 <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.04em' }}>
                   Gross Revenue for the Week
                 </div>
-                <div style={{ fontSize: '1.85rem', fontWeight: 800, color: '#0284c7', marginTop: '0.35rem' }}>
+                <div className="financial-stat-val" style={{ color: '#0284c7' }}>
                   ₦{weeklyRevenue.toLocaleString()}
                 </div>
               </div>
 
               {/* Gross Revenue for the Month */}
-              <div
-                style={{
-                  flex: '1 1 240px',
-                  background: 'var(--bg-card)',
-                  padding: '1.15rem 1.5rem',
-                  borderRadius: '14px',
-                  border: '1px solid var(--border-subtle)',
-                  boxShadow: 'var(--shadow-sm)'
-                }}
-              >
+              <div className="financial-stat-box">
                 <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.04em' }}>
                   Gross Revenue for the Month
                 </div>
-                <div style={{ fontSize: '1.85rem', fontWeight: 800, color: '#10b981', marginTop: '0.35rem' }}>
+                <div className="financial-stat-val" style={{ color: '#10b981' }}>
                   ₦{monthlyRevenue.toLocaleString()}
                 </div>
               </div>
@@ -828,6 +711,181 @@ export default function SuperAdminView() {
           </div>
         </section>
       )}
+
+      {/* Responsive Segmented Tabs Style */}
+      <style jsx>{`
+        .superadmin-tabs-bar {
+          display: flex;
+          gap: 0.5rem;
+          background: var(--bg-card);
+          padding: 6px;
+          border-radius: 16px;
+          border: 1px solid var(--border-subtle);
+          box-shadow: var(--shadow-sm);
+          margin-bottom: 2rem;
+          flex-wrap: wrap;
+        }
+
+        .superadmin-tab-btn {
+          flex: 1 1 180px;
+          display: flex;
+          align-items: center;
+          justifyContent: center;
+          gap: 0.6rem;
+          padding: 0.85rem 1.25rem;
+          border-radius: 12px;
+          font-size: 0.88rem;
+          font-weight: 700;
+          border: none;
+          cursor: pointer;
+          background: transparent;
+          color: var(--text-muted);
+          transition: all 0.15s ease;
+        }
+
+        .superadmin-tab-btn:hover {
+          background: var(--bg-hover);
+          color: var(--text-main);
+        }
+
+        .superadmin-tab-btn.active {
+          background: var(--primary);
+          color: #ffffff;
+          box-shadow: var(--shadow-sm);
+        }
+
+        .tab-label-group {
+          display: flex;
+          align-items: center;
+          gap: 0.45rem;
+        }
+
+        .tab-badge {
+          font-size: 0.72rem;
+          padding: 2px 7px;
+          border-radius: 999px;
+          background: var(--bg-inset);
+          color: var(--text-main);
+          font-weight: 800;
+        }
+
+        .superadmin-tab-btn.active .tab-badge {
+          background: rgba(255, 255, 255, 0.25);
+          color: #ffffff;
+        }
+
+        .tab-label-mobile {
+          display: none;
+        }
+
+        .tab-label-desktop {
+          display: inline;
+        }
+
+        @media (max-width: 768px) {
+          .superadmin-tabs-bar {
+            display: grid !important;
+            grid-template-columns: repeat(4, 1fr) !important;
+            gap: 0.35rem !important;
+            padding: 4px !important;
+            border-radius: 14px !important;
+            margin-bottom: 1.25rem !important;
+          }
+
+          .superadmin-tab-btn {
+            flex: none !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justifyContent: center !important;
+            padding: 0.55rem 0.2rem !important;
+            gap: 0.25rem !important;
+            border-radius: 10px !important;
+            min-width: 0 !important;
+          }
+
+          .superadmin-tab-btn :global(.tab-icon) {
+            width: 17px !important;
+            height: 17px !important;
+          }
+
+          .tab-label-group {
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 0.15rem !important;
+          }
+
+          .tab-label-desktop {
+            display: none !important;
+          }
+
+          .tab-label-mobile {
+            display: inline !important;
+            font-size: 0.74rem !important;
+            font-weight: 700 !important;
+            line-height: 1.1 !important;
+          }
+
+          .tab-badge {
+            font-size: 0.65rem !important;
+            padding: 1px 5px !important;
+            line-height: 1.1 !important;
+          }
+
+          .financial-executive-header {
+            padding: 1.25rem 1rem !important;
+            margin-bottom: 1.5rem !important;
+            border-radius: 16px !important;
+          }
+
+          .financial-heading {
+            font-size: 1.2rem !important;
+            line-height: 1.35 !important;
+            margin: 0 0 1rem !important;
+            letter-spacing: -0.01em !important;
+          }
+
+          .financial-stat-box {
+            padding: 1rem 1.15rem !important;
+          }
+
+          .financial-stat-val {
+            font-size: 1.45rem !important;
+          }
+        }
+
+        .financial-executive-header {
+          padding: 2rem;
+          margin-bottom: 2.5rem;
+          background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(14, 165, 233, 0.06) 100%);
+          border: 1px solid var(--border-subtle);
+          border-radius: 20px;
+        }
+
+        .financial-heading {
+          font-size: 1.85rem;
+          font-weight: 800;
+          color: var(--text-main);
+          margin: 0 0 1.25rem;
+          letter-spacing: -0.02em;
+          line-height: 1.25;
+        }
+
+        .financial-stat-box {
+          flex: 1 1 240px;
+          background: var(--bg-card);
+          padding: 1.15rem 1.5rem;
+          border-radius: 14px;
+          border: 1px solid var(--border-subtle);
+          box-shadow: var(--shadow-sm);
+        }
+
+        .financial-stat-val {
+          font-size: 1.85rem;
+          font-weight: 800;
+          margin-top: 0.35rem;
+          line-height: 1.2;
+        }
+      `}</style>
     </div>
   );
 }

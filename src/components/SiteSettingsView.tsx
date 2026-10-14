@@ -34,7 +34,7 @@ export default function SiteSettingsView() {
 
   // Local draft state for atomic editing
   const [draft, setDraft] = useState<SiteSettings>(siteSettings);
-  const [activeSection, setActiveSection] = useState<'ticker' | 'bulletin' | 'banking' | 'wifi' | 'branding'>('ticker');
+  const [activeSection, setActiveSection] = useState<'ticker' | 'banking' | 'wifi' | 'branding'>('ticker');
   const [hasChanges, setHasChanges] = useState(false);
   const [confirmResetModal, setConfirmResetModal] = useState(false);
 
@@ -140,9 +140,6 @@ export default function SiteSettingsView() {
                 LIVE SYNC ENABLED
               </span>
             </div>
-            <p style={{ fontSize: '0.84rem', color: 'var(--text-muted)', margin: '0.25rem 0 0', lineHeight: 1.5 }}>
-              Edit live website announcements, urgent campus bulletins, bank account details, WiFi rates, and contact info in real-time.
-            </p>
           </div>
         </div>
 
@@ -229,7 +226,6 @@ export default function SiteSettingsView() {
 
           {[
             { id: 'ticker', label: 'Marquee & Announcements', icon: Megaphone, badge: draft.showTicker ? 'Active' : 'Off', badgeColor: draft.showTicker ? '#16a34a' : '#64748b' },
-            { id: 'bulletin', label: 'Urgent Campus Bulletin', icon: AlertTriangle, badge: draft.urgentBulletin?.active ? 'Live Banner' : 'Hidden', badgeColor: draft.urgentBulletin?.active ? '#ea580c' : '#64748b' },
             { id: 'banking', label: 'Bank Details & Remita Switch', icon: CreditCard, badge: draft.bankDetails?.bankName?.split(' ')[0] || 'Bank', badgeColor: '#0284c7' },
             { id: 'wifi', label: 'WiFi Hotspot & Power Status', icon: Wifi, badge: `₦${draft.wifiRates?.oneHour || 300}/hr`, badgeColor: '#8b5cf6' },
             { id: 'branding', label: 'Branding, Hotlines & Hours', icon: Building, badge: 'Official', badgeColor: '#059669' }
@@ -441,223 +437,7 @@ export default function SiteSettingsView() {
             </div>
           )}
 
-          {/* SECTION 2: URGENT CAMPUS BULLETIN */}
-          {activeSection === 'bulletin' && (
-            <div
-              className="glass-card"
-              style={{
-                padding: '2rem',
-                borderRadius: '20px',
-                background: 'var(--bg-card)',
-                border: '1px solid var(--border-subtle)',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '1.5rem'
-              }}
-            >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '1.25rem' }}>
-                <div>
-                  <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-main)', margin: '0 0 0.25rem' }}>
-                    Campus Urgent Bulletin Banner
-                  </h3>
-                  <p style={{ fontSize: '0.84rem', color: 'var(--text-muted)', margin: 0 }}>
-                    Prominently pins a high-visibility alert banner on the home page and header during crucial registry deadlines.
-                  </p>
-                </div>
 
-                {/* Banner Active Toggle */}
-                <label style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer', userSelect: 'none' }}>
-                  <span style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--text-main)' }}>
-                    Active Status:
-                  </span>
-                  <div
-                    onClick={() => handleNestedChange('urgentBulletin', 'active', !draft.urgentBulletin.active)}
-                    style={{
-                      width: '46px',
-                      height: '26px',
-                      borderRadius: '9999px',
-                      background: draft.urgentBulletin.active ? '#ea580c' : 'var(--border-subtle)',
-                      position: 'relative',
-                      cursor: 'pointer',
-                      transition: 'background 0.2s ease'
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: '20px',
-                        height: '20px',
-                        borderRadius: '50%',
-                        background: '#ffffff',
-                        position: 'absolute',
-                        top: '3px',
-                        left: draft.urgentBulletin.active ? '23px' : '3px',
-                        transition: 'left 0.2s ease',
-                        boxShadow: '0 1px 3px rgba(0,0,0,0.3)'
-                      }}
-                    />
-                  </div>
-                  <span style={{ fontSize: '0.78rem', fontWeight: 700, color: draft.urgentBulletin.active ? '#c2410c' : 'var(--text-dim)' }}>
-                    {draft.urgentBulletin.active ? 'PUBLISHED' : 'HIDDEN'}
-                  </span>
-                </label>
-              </div>
-
-              {/* Severity Style Switcher */}
-              <div>
-                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.45rem' }}>
-                  Alert Type & Severity Theme
-                </label>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '0.75rem' }}>
-                  {[
-                    { id: 'info', label: 'Information (Blue)', bg: '#eff6ff', border: '#bfdbfe', color: '#1d4ed8' },
-                    { id: 'warning', label: 'Warning (Amber)', bg: '#fffbeb', border: '#fde68a', color: '#b45309' },
-                    { id: 'alert', label: 'Critical Alert (Red)', bg: '#fef2f2', border: '#fecaca', color: '#b91c1c' },
-                    { id: 'success', label: 'Notice / Cleared (Green)', bg: '#f0fdf4', border: '#bbf7d0', color: '#15803d' }
-                  ].map((styleOption) => {
-                    const selected = draft.urgentBulletin.type === styleOption.id;
-                    return (
-                      <button
-                        key={styleOption.id}
-                        onClick={() => handleNestedChange('urgentBulletin', 'type', styleOption.id as any)}
-                        style={{
-                          padding: '0.65rem 0.85rem',
-                          borderRadius: '10px',
-                          border: selected ? `2px solid ${styleOption.color}` : '1px solid var(--border-subtle)',
-                          background: selected ? styleOption.bg : 'var(--bg-inset)',
-                          color: styleOption.color,
-                          fontWeight: 700,
-                          fontSize: '0.78rem',
-                          cursor: 'pointer',
-                          textAlign: 'center'
-                        }}
-                      >
-                        {styleOption.label}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Title & Badge */}
-              <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '1rem' }}>
-                <div>
-                  <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.45rem' }}>
-                    Bulletin Title
-                  </label>
-                  <input
-                    type="text"
-                    value={draft.urgentBulletin.title}
-                    onChange={(e) => handleNestedChange('urgentBulletin', 'title', e.target.value)}
-                    placeholder="e.g. FUTO Academic Desk Notice"
-                    style={{ width: '100%', padding: '0.65rem 0.85rem', borderRadius: '10px', border: '1px solid var(--border-subtle)', fontSize: '0.86rem' }}
-                  />
-                </div>
-                <div>
-                  <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.45rem' }}>
-                    Badge Tag
-                  </label>
-                  <input
-                    type="text"
-                    value={draft.urgentBulletin.badge || 'LIVE UPDATE'}
-                    onChange={(e) => handleNestedChange('urgentBulletin', 'badge', e.target.value)}
-                    placeholder="e.g. DEADLINE or NOTICE"
-                    style={{ width: '100%', padding: '0.65rem 0.85rem', borderRadius: '10px', border: '1px solid var(--border-subtle)', fontSize: '0.86rem' }}
-                  />
-                </div>
-              </div>
-
-              {/* Message Content */}
-              <div>
-                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.45rem' }}>
-                  Bulletin Instructions / Message Body
-                </label>
-                <textarea
-                  rows={3}
-                  value={draft.urgentBulletin.message}
-                  onChange={(e) => handleNestedChange('urgentBulletin', 'message', e.target.value)}
-                  placeholder="Detailed instructions or screening announcement for students..."
-                  style={{
-                    width: '100%',
-                    padding: '0.75rem',
-                    borderRadius: '10px',
-                    border: '1px solid var(--border-subtle)',
-                    fontSize: '0.86rem',
-                    lineHeight: 1.5,
-                    resize: 'vertical'
-                  }}
-                />
-              </div>
-
-              {/* Live Preview Box */}
-              <div>
-                <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                  Live Preview as rendered on website:
-                </label>
-                <div
-                  style={{
-                    padding: '1.25rem 1.5rem',
-                    borderRadius: '14px',
-                    background:
-                      draft.urgentBulletin.type === 'alert'
-                        ? '#fef2f2'
-                        : draft.urgentBulletin.type === 'warning'
-                        ? '#fffbeb'
-                        : draft.urgentBulletin.type === 'success'
-                        ? '#f0fdf4'
-                        : '#eff6ff',
-                    border: `1.5px solid ${
-                      draft.urgentBulletin.type === 'alert'
-                        ? '#fca5a5'
-                        : draft.urgentBulletin.type === 'warning'
-                        ? '#fcd34d'
-                        : draft.urgentBulletin.type === 'success'
-                        ? '#86efac'
-                        : '#93c5fd'
-                    }`,
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    gap: '1rem'
-                  }}
-                >
-                  <AlertTriangle
-                    size={22}
-                    color={
-                      draft.urgentBulletin.type === 'alert'
-                        ? '#dc2626'
-                        : draft.urgentBulletin.type === 'warning'
-                        ? '#d97706'
-                        : draft.urgentBulletin.type === 'success'
-                        ? '#16a34a'
-                        : '#0284c7'
-                    }
-                    style={{ flexShrink: 0, marginTop: '2px' }}
-                  />
-                  <div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.35rem' }}>
-                      <span
-                        style={{
-                          fontSize: '0.68rem',
-                          fontWeight: 800,
-                          padding: '0.15rem 0.45rem',
-                          borderRadius: '4px',
-                          background: 'rgba(0,0,0,0.08)',
-                          color: 'var(--text-main)'
-                        }}
-                      >
-                        {draft.urgentBulletin.badge || 'NOTICE'}
-                      </span>
-                      <strong style={{ fontSize: '0.92rem', color: 'var(--text-main)' }}>
-                        {draft.urgentBulletin.title || 'Official Announcement'}
-                      </strong>
-                    </div>
-                    <p style={{ fontSize: '0.84rem', color: 'var(--text-main)', margin: 0, lineHeight: 1.5 }}>
-                      {draft.urgentBulletin.message || 'No message provided.'}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
 
           {/* SECTION 3: BANK DETAILS & REMITA SWITCH */}
           {activeSection === 'banking' && (

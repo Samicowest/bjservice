@@ -179,13 +179,6 @@ export interface SiteSettings {
   heroBadgeMobile: string;
   showTicker: boolean;
   announcementTicker: string;
-  urgentBulletin: {
-    active: boolean;
-    title: string;
-    message: string;
-    type: 'info' | 'warning' | 'alert' | 'success';
-    badge?: string;
-  };
   bankDetails: {
     bankName: string;
     accountNumber: string;

@@ -8,13 +8,6 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   heroBadgeMobile: 'BJ SERVICES • FUTO DIGITAL HUB',
   showTicker: true,
   announcementTicker: '🚨 FUTO 2024/2025 Supplementary & Direct Entry Screening Now Active • NIMC Smart Card Production In Progress Beside PPRC • 150 Mbps High-Speed Fibre Hotspot Available 24/7',
-  urgentBulletin: {
-    active: true,
-    title: 'FUTO Academic Desk Notice',
-    message: 'Official Transcript requests, Post-UTME screening, and Remita fee receipts are processed with 15-minute priority verification at our PPRC center.',
-    type: 'info',
-    badge: 'LIVE UPDATE'
-  },
   bankDetails: {
     bankName: 'Moniepoint Microfinance Bank',
     accountNumber: '8166221330',
