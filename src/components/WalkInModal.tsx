@@ -90,7 +90,7 @@ export default function WalkInModal() {
               <UserPlus size={18} />
             </div>
             <div>
-              <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-main)' }}>Walk-in Counter Quick Order</h3>
+              <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-main)' }}>Walk-in Counter Service Request</h3>
               <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Create trackable pipeline task on behalf of walk-in student</p>
             </div>
           </div>
@@ -186,9 +186,9 @@ export default function WalkInModal() {
             )}
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '1.25rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '1.25rem' }}>
             <div>
-              <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-main)', fontWeight: 600, marginBottom: '4px' }}>
+              <label style={{ display: 'block', fontSize: '0.84rem', color: 'var(--text-main)', fontWeight: 600, marginBottom: '0.45rem' }}>
                 Walk-in Customer Name *
               </label>
               <input
@@ -201,7 +201,7 @@ export default function WalkInModal() {
             </div>
 
             <div>
-              <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-main)', fontWeight: 600, marginBottom: '4px' }}>
+              <label style={{ display: 'block', fontSize: '0.84rem', color: 'var(--text-main)', fontWeight: 600, marginBottom: '0.45rem' }}>
                 Mobile Number (for SMS) *
               </label>
               <input
@@ -215,7 +215,7 @@ export default function WalkInModal() {
           </div>
 
           <div style={{ marginBottom: '1.25rem' }}>
-            <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-main)', fontWeight: 600, marginBottom: '4px' }}>
+            <label style={{ display: 'block', fontSize: '0.84rem', color: 'var(--text-main)', fontWeight: 600, marginBottom: '0.45rem' }}>
               Counter Payment Method
             </label>
             <div style={{ display: 'flex', gap: '0.5rem' }}>

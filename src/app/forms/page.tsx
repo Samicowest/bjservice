@@ -373,15 +373,7 @@ function FormsContent() {
             </span>
           </div>
 
-          <div
-            className="glass-card"
-            style={{
-              padding: 'clamp(1.5rem, 3vw, 2.5rem)',
-              borderRadius: '24px',
-              border: '1px solid var(--border-subtle)',
-              background: 'var(--bg-card)'
-            }}
-          >
+          <div>
             {activeForm === 'transcript' && <TranscriptForm onSuccess={handleFormSuccess} standalone={true} />}
             {activeForm === 'supplementary' && <SupplementaryForm onSuccess={handleFormSuccess} standalone={true} />}
             {activeForm === 'school_fees' && <SchoolFeesForm onSuccess={handleFormSuccess} standalone={true} />}

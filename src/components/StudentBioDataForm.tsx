@@ -84,11 +84,11 @@ export default function StudentBioDataForm({ onSuccess, standalone = true }: Stu
   };
 
   return (
-    <div className={standalone ? "official-form-container max-w-3xl mx-auto p-4 sm:p-6 md:p-8 bg-white shadow-xl rounded-2xl border border-slate-200 w-full" : "w-full"}>
+    <div className={standalone ? "official-form-container max-w-3xl mx-auto p-5 sm:p-7 md:p-9 bg-white shadow-xl rounded-2xl border border-slate-200 w-full" : "w-full"}>
       {/* Header Badge */}
       {standalone && (
-        <div className="text-center mb-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 border border-orange-200 text-orange-700 text-xs font-bold uppercase tracking-wider mb-2">
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 border border-orange-200 text-orange-700 text-xs font-bold uppercase tracking-wider mb-2.5">
             <ShieldCheck size={14} className="text-orange-600" />
             <span>BJ Services • Official FUTO Registry Profile Desk</span>
           </div>
@@ -101,19 +101,22 @@ export default function StudentBioDataForm({ onSuccess, standalone = true }: Stu
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-6">
         {/* Section 1: Personal Details */}
-        <div className="p-3.5 sm:p-5 rounded-xl bg-slate-50 border border-slate-200/80">
-          <div className="flex items-center gap-2 mb-3.5 pb-2 border-b border-slate-200">
-            <User size={18} className="text-blue-600 shrink-0" />
-            <h3 className="text-xs font-extrabold text-slate-800 uppercase tracking-wider">
-              1. Personal Identity & Vital Details
-            </h3>
+        <div className="form-section-card">
+          <div className="form-section-header">
+            <div className="form-section-icon" style={{ background: '#fff7ed', color: '#ea580c' }}>
+              <User size={18} />
+            </div>
+            <div>
+              <h3 className="form-section-title">1. Personal Identity & Vital Details</h3>
+              <p className="text-xs text-slate-500">Official student biodata for biometric portal registration</p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
             <div>
-              <label>JAMB Registration Number *</label>
+              <label>JAMB Registration Number <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="jambRegNo"
@@ -125,7 +128,7 @@ export default function StudentBioDataForm({ onSuccess, standalone = true }: Stu
               />
             </div>
             <div>
-              <label>Surname *</label>
+              <label>Surname <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="surname"
@@ -136,7 +139,7 @@ export default function StudentBioDataForm({ onSuccess, standalone = true }: Stu
               />
             </div>
             <div>
-              <label>First Name *</label>
+              <label>First Name <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="firstName"
@@ -148,7 +151,7 @@ export default function StudentBioDataForm({ onSuccess, standalone = true }: Stu
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
             <div>
               <label>Middle Name</label>
               <input
@@ -160,14 +163,14 @@ export default function StudentBioDataForm({ onSuccess, standalone = true }: Stu
               />
             </div>
             <div>
-              <label>Gender / Sex *</label>
+              <label>Gender / Sex <span className="text-red-500 font-bold">*</span></label>
               <select name="sex" className="form-select" value={formData.sex} onChange={handleChange} required>
                 <option value="MALE">Male</option>
                 <option value="FEMALE">Female</option>
               </select>
             </div>
             <div>
-              <label>Date of Birth *</label>
+              <label>Date of Birth <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="date"
                 name="dob"
@@ -178,9 +181,9 @@ export default function StudentBioDataForm({ onSuccess, standalone = true }: Stu
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mt-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
             <div>
-              <label>Blood Group *</label>
+              <label>Blood Group <span className="text-red-500 font-bold">*</span></label>
               <select name="bloodGroup" className="form-select" value={formData.bloodGroup} onChange={handleChange} required>
                 <option value="O+">O+</option>
                 <option value="O-">O-</option>
@@ -193,7 +196,7 @@ export default function StudentBioDataForm({ onSuccess, standalone = true }: Stu
               </select>
             </div>
             <div>
-              <label>Genotype *</label>
+              <label>Genotype <span className="text-red-500 font-bold">*</span></label>
               <select name="genotype" className="form-select" value={formData.genotype} onChange={handleChange} required>
                 <option value="AA">AA</option>
                 <option value="AS">AS</option>
@@ -202,7 +205,7 @@ export default function StudentBioDataForm({ onSuccess, standalone = true }: Stu
               </select>
             </div>
             <div>
-              <label>State of Origin *</label>
+              <label>State of Origin <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="state"
@@ -213,7 +216,7 @@ export default function StudentBioDataForm({ onSuccess, standalone = true }: Stu
               />
             </div>
             <div>
-              <label>L.G.A *</label>
+              <label>L.G.A <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="lga"
@@ -225,7 +228,7 @@ export default function StudentBioDataForm({ onSuccess, standalone = true }: Stu
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <label>Hometown</label>
               <input
@@ -260,17 +263,20 @@ export default function StudentBioDataForm({ onSuccess, standalone = true }: Stu
         </div>
 
         {/* Section 2: Contact Information & Portal Access */}
-        <div className="p-3.5 sm:p-5 rounded-xl bg-slate-50 border border-slate-200/80">
-          <div className="flex items-center gap-2 mb-3.5 pb-2 border-b border-slate-200">
-            <Lock size={18} className="text-blue-600 shrink-0" />
-            <h3 className="text-xs font-extrabold text-slate-800 uppercase tracking-wider">
-              2. Portal Login & Residential Addresses
-            </h3>
+        <div className="form-section-card">
+          <div className="form-section-header">
+            <div className="form-section-icon" style={{ background: '#fff7ed', color: '#ea580c' }}>
+              <Lock size={18} />
+            </div>
+            <div>
+              <h3 className="form-section-title">2. Portal Login & Residential Addresses</h3>
+              <p className="text-xs text-slate-500">Security password and address details for postal records</p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
             <div>
-              <label>Official Email Address *</label>
+              <label>Official Email Address <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="email"
                 name="emailAddress"
@@ -281,7 +287,7 @@ export default function StudentBioDataForm({ onSuccess, standalone = true }: Stu
               />
             </div>
             <div>
-              <label>Phone Number *</label>
+              <label>Phone Number <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="tel"
                 name="phoneNo"
@@ -292,7 +298,7 @@ export default function StudentBioDataForm({ onSuccess, standalone = true }: Stu
               />
             </div>
             <div>
-              <label>FUTO Portal Password *</label>
+              <label>FUTO Portal Password <span className="text-red-500 font-bold">*</span></label>
               <div className="relative">
                 <input
                   type={showPassword ? 'text' : 'password'}
@@ -313,9 +319,9 @@ export default function StudentBioDataForm({ onSuccess, standalone = true }: Stu
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label>Residential Contact Address *</label>
+              <label>Residential Contact Address <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="contactAddress"
@@ -326,7 +332,7 @@ export default function StudentBioDataForm({ onSuccess, standalone = true }: Stu
               />
             </div>
             <div>
-              <label>Permanent Home Address *</label>
+              <label>Permanent Home Address <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="permanentAddress"
@@ -340,23 +346,26 @@ export default function StudentBioDataForm({ onSuccess, standalone = true }: Stu
         </div>
 
         {/* Section 3: Sponsor & Next of Kin Details */}
-        <div className="p-3.5 sm:p-5 rounded-xl bg-slate-50 border border-slate-200/80">
-          <div className="flex items-center gap-2 mb-3.5 pb-2 border-b border-slate-200">
-            <Users size={18} className="text-blue-600 shrink-0" />
-            <h3 className="text-xs font-extrabold text-slate-800 uppercase tracking-wider">
-              3. Sponsor & Next of Kin Records
-            </h3>
+        <div className="form-section-card">
+          <div className="form-section-header">
+            <div className="form-section-icon" style={{ background: '#fff7ed', color: '#ea580c' }}>
+              <Users size={18} />
+            </div>
+            <div>
+              <h3 className="form-section-title">3. Sponsor & Next of Kin Records</h3>
+              <p className="text-xs text-slate-500">Contact information in case of institutional emergency</p>
+            </div>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-5">
             {/* Sponsor */}
-            <div className="p-3.5 bg-white rounded-lg border border-slate-200">
-              <span className="text-[11px] font-bold text-blue-700 uppercase tracking-wider block mb-2.5">
-                Sponsor Details
+            <div className="p-4 sm:p-5 bg-slate-50 rounded-xl border border-slate-200">
+              <span className="text-xs font-bold text-blue-700 uppercase tracking-wider block mb-3">
+                Sponsor Information
               </span>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
                 <div>
-                  <label>Sponsor Surname *</label>
+                  <label>Sponsor Surname <span className="text-red-500 font-bold">*</span></label>
                   <input
                     type="text"
                     name="sponsorSurname"
@@ -367,7 +376,7 @@ export default function StudentBioDataForm({ onSuccess, standalone = true }: Stu
                   />
                 </div>
                 <div>
-                  <label>First Name *</label>
+                  <label>First Name <span className="text-red-500 font-bold">*</span></label>
                   <input
                     type="text"
                     name="sponsorFirstName"
@@ -378,7 +387,7 @@ export default function StudentBioDataForm({ onSuccess, standalone = true }: Stu
                   />
                 </div>
                 <div>
-                  <label>Phone Number *</label>
+                  <label>Phone Number <span className="text-red-500 font-bold">*</span></label>
                   <input
                     type="tel"
                     name="sponsorPhoneNo"
@@ -389,9 +398,9 @@ export default function StudentBioDataForm({ onSuccess, standalone = true }: Stu
                   />
                 </div>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label>Relationship *</label>
+                  <label>Relationship <span className="text-red-500 font-bold">*</span></label>
                   <input
                     type="text"
                     name="sponsorRelationship"
@@ -402,7 +411,7 @@ export default function StudentBioDataForm({ onSuccess, standalone = true }: Stu
                   />
                 </div>
                 <div>
-                  <label>Sponsor Address *</label>
+                  <label>Sponsor Address <span className="text-red-500 font-bold">*</span></label>
                   <input
                     type="text"
                     name="sponsorAddress"
@@ -416,13 +425,13 @@ export default function StudentBioDataForm({ onSuccess, standalone = true }: Stu
             </div>
 
             {/* Next of Kin */}
-            <div className="p-3.5 bg-white rounded-lg border border-slate-200">
-              <span className="text-[11px] font-bold text-indigo-700 uppercase tracking-wider block mb-2.5">
-                Next of Kin Details
+            <div className="p-4 sm:p-5 bg-slate-50 rounded-xl border border-slate-200">
+              <span className="text-xs font-bold text-indigo-700 uppercase tracking-wider block mb-3">
+                Next of Kin Information
               </span>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
                 <div>
-                  <label>Next of Kin Surname *</label>
+                  <label>Next of Kin Surname <span className="text-red-500 font-bold">*</span></label>
                   <input
                     type="text"
                     name="nextOfKinSurname"
@@ -433,7 +442,7 @@ export default function StudentBioDataForm({ onSuccess, standalone = true }: Stu
                   />
                 </div>
                 <div>
-                  <label>First Name *</label>
+                  <label>First Name <span className="text-red-500 font-bold">*</span></label>
                   <input
                     type="text"
                     name="nextOfKinFirstName"
@@ -444,7 +453,7 @@ export default function StudentBioDataForm({ onSuccess, standalone = true }: Stu
                   />
                 </div>
                 <div>
-                  <label>Phone Number *</label>
+                  <label>Phone Number <span className="text-red-500 font-bold">*</span></label>
                   <input
                     type="tel"
                     name="nextOfKinPhoneNo"
@@ -455,9 +464,9 @@ export default function StudentBioDataForm({ onSuccess, standalone = true }: Stu
                   />
                 </div>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label>Relationship *</label>
+                  <label>Relationship <span className="text-red-500 font-bold">*</span></label>
                   <input
                     type="text"
                     name="nextOfKinRelationship"
@@ -468,7 +477,7 @@ export default function StudentBioDataForm({ onSuccess, standalone = true }: Stu
                   />
                 </div>
                 <div>
-                  <label>Next of Kin Address *</label>
+                  <label>Next of Kin Address <span className="text-red-500 font-bold">*</span></label>
                   <input
                     type="text"
                     name="nextOfKinAddress"
@@ -484,17 +493,20 @@ export default function StudentBioDataForm({ onSuccess, standalone = true }: Stu
         </div>
 
         {/* Section 4: Academic Programme Details */}
-        <div className="p-3.5 sm:p-5 rounded-xl bg-slate-50 border border-slate-200/80">
-          <div className="flex items-center gap-2 mb-3.5 pb-2 border-b border-slate-200">
-            <GraduationCap size={18} className="text-blue-600 shrink-0" />
-            <h3 className="text-xs font-extrabold text-slate-800 uppercase tracking-wider">
-              4. Academic Enrolment & Programme
-            </h3>
+        <div className="form-section-card">
+          <div className="form-section-header">
+            <div className="form-section-icon" style={{ background: '#fff7ed', color: '#ea580c' }}>
+              <GraduationCap size={18} />
+            </div>
+            <div>
+              <h3 className="form-section-title">4. Academic Enrolment & Programme</h3>
+              <p className="text-xs text-slate-500">Degree details matching your admission letter</p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
             <div>
-              <label>Department / Course *</label>
+              <label>Department / Course <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="department"
@@ -505,7 +517,7 @@ export default function StudentBioDataForm({ onSuccess, standalone = true }: Stu
               />
             </div>
             <div>
-              <label>Mode of Entry *</label>
+              <label>Mode of Entry <span className="text-red-500 font-bold">*</span></label>
               <select name="modeOfEntry" className="form-select" value={formData.modeOfEntry} onChange={handleChange} required>
                 <option value="UTME">UTME (JAMB)</option>
                 <option value="DIRECT_ENTRY">Direct Entry (DE)</option>
@@ -516,9 +528,9 @@ export default function StudentBioDataForm({ onSuccess, standalone = true }: Stu
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mt-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div>
-              <label>Student Type *</label>
+              <label>Student Type <span className="text-red-500 font-bold">*</span></label>
               <select name="studentType" className="form-select" value={formData.studentType} onChange={handleChange} required>
                 <option value="UNDERGRADUATE">Undergraduate</option>
                 <option value="POSTGRADUATE">Postgraduate</option>
@@ -527,14 +539,14 @@ export default function StudentBioDataForm({ onSuccess, standalone = true }: Stu
               </select>
             </div>
             <div>
-              <label>Mode of Study *</label>
+              <label>Mode of Study <span className="text-red-500 font-bold">*</span></label>
               <select name="modeOfStudy" className="form-select" value={formData.modeOfStudy} onChange={handleChange} required>
                 <option value="FULL TIME">Full Time</option>
                 <option value="PART TIME">Part Time</option>
               </select>
             </div>
             <div>
-              <label>Entry Level *</label>
+              <label>Entry Level <span className="text-red-500 font-bold">*</span></label>
               <select name="entryLevel" className="form-select" value={formData.entryLevel} onChange={handleChange} required>
                 <option value="100 Level">100 Level</option>
                 <option value="200 Level">200 Level</option>
@@ -543,7 +555,7 @@ export default function StudentBioDataForm({ onSuccess, standalone = true }: Stu
               </select>
             </div>
             <div>
-              <label>Entry Academic Year *</label>
+              <label>Entry Academic Year <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="entryYear"
@@ -557,7 +569,7 @@ export default function StudentBioDataForm({ onSuccess, standalone = true }: Stu
         </div>
 
         {/* Official Fee Summary */}
-        <div className="p-4 sm:p-5 rounded-xl bg-orange-50/70 border border-orange-200">
+        <div className="p-5 sm:p-6 rounded-2xl bg-orange-50/80 border border-orange-200 mb-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
               <div className="flex items-center gap-2">

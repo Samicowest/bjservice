@@ -5,7 +5,7 @@ import { useCyber } from '../context/CyberContext';
 import { Wifi, X, Lock, User, ArrowRight, ShieldCheck, Zap, Radio } from 'lucide-react';
 
 export default function WifiModal() {
-  const { activeModal, setActiveModal, showToast } = useCyber();
+  const { activeModal, setActiveModal, showToast, siteSettings } = useCyber();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isConnecting, setIsConnecting] = useState(false);
@@ -53,7 +53,7 @@ export default function WifiModal() {
               <Wifi size={20} />
             </div>
             <div>
-              <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-main)' }}>BJ Services 24hr WiFi Access</h3>
+              <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-main)' }}>{siteSettings?.brandName || 'BJ Services'} 24hr WiFi Access</h3>
               <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Mikrotik Campus Hotspot Gateway</p>
             </div>
           </div>
@@ -93,13 +93,13 @@ export default function WifiModal() {
                 Access Authorized!
               </h4>
               <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '1.25rem' }}>
-                Connected to <strong style={{ color: 'var(--primary)' }}>BJ_SERVICES_5GHz_FIBRE</strong>. Generator backup active.
+                Connected to <strong style={{ color: 'var(--primary)' }}>{siteSettings?.wifiRates?.hotspotSsid || 'BJ_SERVICES_5GHz_FIBRE'}</strong>. {siteSettings?.wifiRates?.generatorStatus || 'Generator backup active.'}
               </p>
 
               <div style={{ background: 'var(--bg-surface)', padding: '1rem', borderRadius: '10px', marginBottom: '1.5rem', textAlign: 'left', fontSize: '0.82rem', border: '1px solid var(--border-subtle)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
                   <span style={{ color: 'var(--text-muted)' }}>Speed:</span>
-                  <strong style={{ color: '#10b981' }}>150 Mbps Symmetrical</strong>
+                  <strong style={{ color: '#10b981' }}>{siteSettings?.wifiRates?.speed || '150 Mbps Symmetrical'}</strong>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
                   <span style={{ color: 'var(--text-muted)' }}>IP Address:</span>
@@ -107,7 +107,7 @@ export default function WifiModal() {
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <span style={{ color: 'var(--text-muted)' }}>Location:</span>
-                  <span style={{ color: 'var(--text-main)' }}>Old Registry FUTO Beside PPRC</span>
+                  <span style={{ color: 'var(--text-main)' }}>{siteSettings?.contact?.address || 'Old Registry FUTO Beside PPRC'}</span>
                 </div>
               </div>
 
@@ -163,9 +163,9 @@ export default function WifiModal() {
                   Hotspot Voucher Rates:
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--text-main)' }}>
-                  <span>1 Hour: <strong>₦300</strong></span>
-                  <span>4 Hours: <strong>₦600</strong></span>
-                  <span>24 Hours: <strong style={{ color: 'var(--primary)' }}>₦1,000</strong></span>
+                  <span>1 Hour: <strong>₦{(siteSettings?.wifiRates?.oneHour || 300).toLocaleString()}</strong></span>
+                  <span>4 Hours: <strong>₦{(siteSettings?.wifiRates?.fourHours || 600).toLocaleString()}</strong></span>
+                  <span>24 Hours: <strong style={{ color: 'var(--primary)' }}>₦{(siteSettings?.wifiRates?.twentyFourHours || 1000).toLocaleString()}</strong></span>
                 </div>
               </div>
 

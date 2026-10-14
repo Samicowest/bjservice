@@ -202,7 +202,7 @@ export default function AdminDashboardView() {
           onClick={() => setActiveModal('walkin')}
           className="btn btn-accent btn-sm"
         >
-          <span>+ Create Walk-in Order (Counter)</span>
+          <span>+ New Walk-in Service (Counter)</span>
         </button>
       </div>
 

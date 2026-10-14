@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 
 export default function LoginModal() {
-  const { activeModal, setActiveModal, showToast } = useCyber();
+  const { activeModal, setActiveModal, showToast, loginAsDemo } = useCyber();
   const [mode, setMode] = useState<'signin' | 'signup'>('signin');
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -383,6 +383,111 @@ export default function LoginModal() {
                 </button>
               </span>
             )}
+          </div>
+
+          {/* Quick Demo Role Logins */}
+          <div style={{ marginTop: '1.5rem', paddingTop: '1.25rem', borderTop: '1px solid var(--border-subtle)' }}>
+            <div style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', textAlign: 'center', marginBottom: '0.75rem' }}>
+              Quick 1-Click Demo Personas
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.5rem' }}>
+              <button
+                type="button"
+                onClick={() => {
+                  loginAsDemo('super_admin');
+                  setActiveModal(null);
+                }}
+                style={{
+                  padding: '0.55rem 0.65rem',
+                  borderRadius: '10px',
+                  background: 'var(--bg-surface)',
+                  border: '1px solid var(--border-subtle)',
+                  fontSize: '0.78rem',
+                  fontWeight: 700,
+                  color: 'var(--text-main)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                  cursor: 'pointer'
+                }}
+                className="hover:border-[var(--primary)]"
+              >
+                <span>👑</span>
+                <span>Super Admin</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  loginAsDemo('admin');
+                  setActiveModal(null);
+                }}
+                style={{
+                  padding: '0.55rem 0.65rem',
+                  borderRadius: '10px',
+                  background: 'var(--bg-surface)',
+                  border: '1px solid var(--border-subtle)',
+                  fontSize: '0.78rem',
+                  fontWeight: 700,
+                  color: 'var(--text-main)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                  cursor: 'pointer'
+                }}
+                className="hover:border-[var(--primary)]"
+              >
+                <span>🛡️</span>
+                <span>Branch Admin</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  loginAsDemo('worker');
+                  setActiveModal(null);
+                }}
+                style={{
+                  padding: '0.55rem 0.65rem',
+                  borderRadius: '10px',
+                  background: 'var(--bg-surface)',
+                  border: '1px solid var(--border-subtle)',
+                  fontSize: '0.78rem',
+                  fontWeight: 700,
+                  color: 'var(--text-main)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                  cursor: 'pointer'
+                }}
+                className="hover:border-[var(--primary)]"
+              >
+                <span>💻</span>
+                <span>Staff Operator</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  loginAsDemo('customer');
+                  setActiveModal(null);
+                }}
+                style={{
+                  padding: '0.55rem 0.65rem',
+                  borderRadius: '10px',
+                  background: 'var(--bg-surface)',
+                  border: '1px solid var(--border-subtle)',
+                  fontSize: '0.78rem',
+                  fontWeight: 700,
+                  color: 'var(--text-main)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                  cursor: 'pointer'
+                }}
+                className="hover:border-[var(--primary)]"
+              >
+                <span>🎓</span>
+                <span>Student / User</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>

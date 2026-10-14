@@ -54,11 +54,11 @@ export default function SupplementaryForm({ onSuccess, standalone = true }: Supp
   };
 
   return (
-    <div className={standalone ? "official-form-container max-w-3xl mx-auto p-4 sm:p-6 md:p-8 bg-white shadow-xl rounded-2xl border border-slate-200 w-full" : "w-full"}>
+    <div className={standalone ? "official-form-container max-w-3xl mx-auto p-5 sm:p-7 md:p-9 bg-white shadow-xl rounded-2xl border border-slate-200 w-full" : "w-full"}>
       {/* Header Badge */}
       {standalone && (
-        <div className="text-center mb-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-50 border border-purple-200 text-purple-700 text-xs font-bold uppercase tracking-wider mb-2">
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-50 border border-purple-200 text-purple-700 text-xs font-bold uppercase tracking-wider mb-2.5">
             <ShieldCheck size={14} className="text-purple-600" />
             <span>BJ Services • Official FUTO Admissions Desk</span>
           </div>
@@ -71,19 +71,22 @@ export default function SupplementaryForm({ onSuccess, standalone = true }: Supp
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-6">
         {/* Section 1: Candidate Identity & Choice */}
-        <div className="p-3.5 sm:p-5 rounded-xl bg-slate-50 border border-slate-200/80">
-          <div className="flex items-center gap-2 mb-3.5 pb-2 border-b border-slate-200">
-            <GraduationCap size={18} className="text-purple-600 shrink-0" />
-            <h3 className="text-xs font-extrabold text-slate-800 uppercase tracking-wider">
-              1. Candidate Details & Supplementary Choice
-            </h3>
+        <div className="form-section-card">
+          <div className="form-section-header">
+            <div className="form-section-icon" style={{ background: '#faf5ff', color: '#9333ea' }}>
+              <GraduationCap size={18} />
+            </div>
+            <div>
+              <h3 className="form-section-title">1. Candidate Details & Supplementary Choice</h3>
+              <p className="text-xs text-slate-500">Specify your personal details and proposed course of study</p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
             <div>
-              <label>Surname *</label>
+              <label>Surname <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="surname"
@@ -94,7 +97,7 @@ export default function SupplementaryForm({ onSuccess, standalone = true }: Supp
               />
             </div>
             <div>
-              <label>Other Names *</label>
+              <label>Other Names <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="otherNames"
@@ -106,8 +109,8 @@ export default function SupplementaryForm({ onSuccess, standalone = true }: Supp
             </div>
           </div>
 
-          <div className="mt-3">
-            <label>Proposed Supplementary Course of Choice *</label>
+          <div>
+            <label>Proposed Supplementary Course of Choice <span className="text-red-500 font-bold">*</span></label>
             <input
               type="text"
               name="supplementaryCourse"
@@ -120,17 +123,20 @@ export default function SupplementaryForm({ onSuccess, standalone = true }: Supp
         </div>
 
         {/* Section 2: JAMB & Contact Verification */}
-        <div className="p-3.5 sm:p-5 rounded-xl bg-slate-50 border border-slate-200/80">
-          <div className="flex items-center gap-2 mb-3.5 pb-2 border-b border-slate-200">
-            <Mail size={18} className="text-purple-600 shrink-0" />
-            <h3 className="text-xs font-extrabold text-slate-800 uppercase tracking-wider">
-              2. JAMB Credentials & Contact Info
-            </h3>
+        <div className="form-section-card">
+          <div className="form-section-header">
+            <div className="form-section-icon" style={{ background: '#faf5ff', color: '#9333ea' }}>
+              <Mail size={18} />
+            </div>
+            <div>
+              <h3 className="form-section-title">2. JAMB Credentials & Contact Info</h3>
+              <p className="text-xs text-slate-500">Must correspond with your JAMB CAPS profile</p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
             <div>
-              <label>JAMB Registration Number *</label>
+              <label>JAMB Registration Number <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="jambRegNumber"
@@ -142,7 +148,7 @@ export default function SupplementaryForm({ onSuccess, standalone = true }: Supp
               />
             </div>
             <div>
-              <label>Active WhatsApp / Phone Number *</label>
+              <label>Active WhatsApp / Phone Number <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="tel"
                 name="mobileNo"
@@ -154,9 +160,9 @@ export default function SupplementaryForm({ onSuccess, standalone = true }: Supp
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label>Email Address *</label>
+              <label>Email Address <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="email"
                 name="email"
@@ -167,7 +173,7 @@ export default function SupplementaryForm({ onSuccess, standalone = true }: Supp
               />
             </div>
             <div>
-              <label>Application Date *</label>
+              <label>Application Date <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="date"
                 name="date"
@@ -180,17 +186,20 @@ export default function SupplementaryForm({ onSuccess, standalone = true }: Supp
         </div>
 
         {/* Section 3: Remita Payment Code */}
-        <div className="p-3.5 sm:p-5 rounded-xl bg-slate-50 border border-slate-200/80">
-          <div className="flex items-center gap-2 mb-3.5 pb-2 border-b border-slate-200">
-            <CreditCard size={18} className="text-purple-600 shrink-0" />
-            <h3 className="text-xs font-extrabold text-slate-800 uppercase tracking-wider">
-              3. Payment & Remita Billing Reference
-            </h3>
+        <div className="form-section-card">
+          <div className="form-section-header">
+            <div className="form-section-icon" style={{ background: '#faf5ff', color: '#9333ea' }}>
+              <CreditCard size={18} />
+            </div>
+            <div>
+              <h3 className="form-section-title">3. Payment & Remita Billing Reference</h3>
+              <p className="text-xs text-slate-500">Enter official invoice payment verification details</p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label>Supplementary Form Fee (₦) *</label>
+              <label>Supplementary Form Fee (₦) <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="number"
                 name="amount"
@@ -202,7 +211,7 @@ export default function SupplementaryForm({ onSuccess, standalone = true }: Supp
               />
             </div>
             <div>
-              <label>Remita Retrieval Reference (RRR) *</label>
+              <label>Remita Retrieval Reference (RRR) <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="rrr"
@@ -217,8 +226,8 @@ export default function SupplementaryForm({ onSuccess, standalone = true }: Supp
         </div>
 
         {/* Admissions Desk Verification Badge */}
-        <div className="p-3.5 sm:p-4 rounded-xl bg-slate-100 border border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-slate-600">
-          <div className="flex items-center gap-2.5">
+        <div className="p-4 sm:p-5 rounded-xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-slate-600 mb-6">
+          <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg bg-purple-600 text-white flex items-center justify-center shrink-0">
               <CheckCircle2 size={18} />
             </div>
@@ -226,7 +235,7 @@ export default function SupplementaryForm({ onSuccess, standalone = true }: Supp
               <div className="font-bold text-slate-900 uppercase tracking-wide">
                 FUTO Admissions Portal Gateway
               </div>
-              <div className="text-[11px] text-slate-500">
+              <div className="text-xs text-slate-500 mt-0.5">
                 Verified against current FUTO Supplementary quota listings & JAMB CAPS transfer requirements.
               </div>
             </div>
@@ -237,7 +246,7 @@ export default function SupplementaryForm({ onSuccess, standalone = true }: Supp
         </div>
 
         {/* Official Fee Summary */}
-        <div className="p-4 sm:p-5 rounded-xl bg-purple-50/70 border border-purple-200">
+        <div className="p-5 sm:p-6 rounded-2xl bg-purple-50/80 border border-purple-200 mb-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
               <div className="flex items-center gap-2">

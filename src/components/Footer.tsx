@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { useCyber } from '../context/CyberContext';
 import {
   Sparkles,
   MapPin,
@@ -21,6 +22,7 @@ import {
 } from 'lucide-react';
 
 export default function Footer() {
+  const { siteSettings } = useCyber();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -53,8 +55,8 @@ export default function Footer() {
               <Wifi size={20} />
             </div>
             <div>
-              <div style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--text-main)' }}>24hr 150 Mbps WiFi</div>
-              <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>Lister generator backup active</div>
+              <div style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--text-main)' }}>24hr {siteSettings?.wifiRates?.speed || '150 Mbps'} WiFi</div>
+              <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>{siteSettings?.wifiRates?.generatorStatus || 'Lister generator backup active'}</div>
             </div>
           </div>
 
@@ -95,25 +97,25 @@ export default function Footer() {
                 BJ
               </div>
               <span style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-main)', letterSpacing: '-0.02em' }}>
-                BJ<span style={{ color: 'var(--primary)' }}>Services</span>
+                {siteSettings?.brandName?.slice(0, 2) || 'BJ'}<span style={{ color: 'var(--primary)' }}>{siteSettings?.brandName?.slice(2) || 'Services'}</span>
               </span>
             </div>
             <p style={{ fontSize: '0.84rem', color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: '1.25rem' }}>
               Premier cybercafe & academic operations pipeline for FUTO students, staff, and general public. 
-              Unlimited Grace & Mercy digital center.
+              {siteSettings?.tagline ? ` ${siteSettings.tagline} digital center.` : ' Unlimited Grace & Mercy digital center.'}
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem', fontSize: '0.82rem', color: 'var(--text-main)' }}>
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
                 <MapPin size={15} color="var(--primary)" style={{ marginTop: '3px', flexShrink: 0 }} />
-                <span>Old Registry Area, Beside PPRC, FUTO Main Campus, Owerri, Imo State</span>
+                <span>{siteSettings?.contact?.address || 'Old Registry Area, Beside PPRC, FUTO Main Campus, Owerri, Imo State'}</span>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <Phone size={15} color="var(--primary)" style={{ flexShrink: 0 }} />
-                <span>+234 814 920 4812 / +234 803 712 9044</span>
+                <span>{siteSettings?.contact?.primaryPhone || '08166221330'}{siteSettings?.contact?.secondaryPhone ? ` / ${siteSettings.contact.secondaryPhone}` : ''}</span>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <Clock size={15} color="var(--accent-orange)" style={{ flexShrink: 0 }} />
-                <span>Monday – Saturday: 7:30 AM – 9:00 PM</span>
+                <span>{siteSettings?.contact?.openingHours || 'Monday – Saturday: 7:30 AM – 9:00 PM'}</span>
               </div>
             </div>
           </div>

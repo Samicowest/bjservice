@@ -10,7 +10,6 @@ import Breadcrumb from '../../components/Breadcrumb';
 import {
   Layers,
   Search,
-  Clock,
   Sparkles,
   ArrowRight,
   ShieldCheck,
@@ -301,51 +300,37 @@ function ServicesContent() {
                   </h3>
                 </div>
 
-                <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', lineHeight: 1.5, margin: '0.4rem 0 0.85rem', flex: 1 }}>
+                <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', lineHeight: 1.5, margin: '0.4rem 0 1.15rem', flex: 1 }}>
                   {srv.shortDesc}
                 </p>
 
-                {/* Meta details */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', fontSize: '0.75rem', color: 'var(--text-dim)', marginBottom: '1rem', flexWrap: 'wrap' }}>
-                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
-                    <Clock size={13} color="var(--accent-orange)" />
-                    <span>~{srv.estimatedMinutes} mins</span>
-                  </span>
-                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
-                    <ShieldCheck size={13} color="var(--success)" />
-                    <span>Official Stamp</span>
-                  </span>
-                </div>
-
-                {/* Price and Action */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '0.85rem', borderTop: '1px solid var(--border-subtle)', flexWrap: 'wrap', gap: '0.65rem' }}>
-                  <div>
-                    <span style={{ fontSize: '0.7rem', color: 'var(--text-dim)', display: 'block', textTransform: 'uppercase', fontWeight: 700 }}>Total Fee</span>
-                    <span style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--primary)' }}>
-                      ₦{srv.totalPrice.toLocaleString()}
-                    </span>
+                {/* Actions & Official Desk Link */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '0.9rem', borderTop: '1px solid var(--border-subtle)', flexWrap: 'wrap', gap: '0.65rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-dim)', fontSize: '0.78rem', fontWeight: 600 }}>
+                    <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10b981', display: 'inline-block' }} />
+                    <span>Active Portal</span>
                   </div>
 
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: '1 1 auto', justifyContent: 'flex-end' }}>
                     {/* If there's an official form desk version */}
                     {srv.officialFormId && (
                       <Link
                         href={`/forms?type=${srv.officialFormId}`}
                         className="btn btn-outline btn-sm"
-                        style={{ fontSize: '0.75rem', padding: '0.45rem 0.65rem' }}
+                        style={{ fontSize: '0.78rem', padding: '0.48rem 0.75rem', borderRadius: '8px' }}
                         title="Open in Official Forms Desk"
                       >
                         <FileText size={13} />
-                        <span>Form Desk</span>
+                        <span>Official Form</span>
                       </Link>
                     )}
 
                     <button
                       onClick={() => handleStartOrder(srv)}
                       className="btn btn-primary btn-sm"
-                      style={{ fontSize: '0.8rem', padding: '0.45rem 0.85rem', borderRadius: '8px' }}
+                      style={{ fontSize: '0.82rem', padding: '0.48rem 1rem', borderRadius: '8px', fontWeight: 700 }}
                     >
-                      <span>Order Now</span>
+                      <span>Apply Now</span>
                       <ArrowRight size={14} />
                     </button>
                   </div>

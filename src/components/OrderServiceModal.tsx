@@ -29,7 +29,8 @@ export default function OrderServiceModal() {
     selectedServiceForOrder,
     createTask,
     verifyPayment,
-    showToast
+    showToast,
+    siteSettings
   } = useCyber();
 
   if (activeModal !== 'order' || !selectedServiceForOrder) return null;
@@ -225,11 +226,11 @@ export default function OrderServiceModal() {
             </div>
           ) : srv.officialFormId ? (
             <div>
-              <div style={{ marginBottom: '1.25rem', padding: '0.85rem 1rem', background: 'var(--bg-surface)', borderRadius: '12px', border: '1px solid var(--border-subtle)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
-                <span style={{ fontSize: '0.82rem', color: 'var(--text-main)' }}>
+              <div style={{ marginBottom: '1.75rem', padding: '1rem 1.25rem', background: 'var(--bg-surface)', borderRadius: '14px', border: '1px solid var(--border-subtle)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem' }}>
+                <span style={{ fontSize: '0.85rem', color: 'var(--text-main)' }}>
                   📋 <strong>Official Digital Registry Form:</strong> Verified FUTO Cybercafe processing with real-time status tracking.
                 </span>
-                <span className="badge" style={{ background: 'var(--primary-glow)', color: 'var(--primary)' }}>
+                <span className="badge" style={{ background: 'var(--primary-glow)', color: 'var(--primary)', border: '1px solid var(--border-subtle)' }}>
                   Auto-registers into Pipeline
                 </span>
               </div>
@@ -286,15 +287,45 @@ export default function OrderServiceModal() {
             </div>
           ) : (
             <form onSubmit={handleSubmit}>
+              {/* Official Processing Fee Summary inside Form */}
+              <div
+                style={{
+                  background: 'linear-gradient(135deg, rgba(2, 132, 199, 0.08) 0%, rgba(16, 185, 129, 0.08) 100%)',
+                  border: '1px solid rgba(2, 132, 199, 0.22)',
+                  borderRadius: '16px',
+                  padding: '1.15rem 1.4rem',
+                  marginBottom: '1.75rem',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  flexWrap: 'wrap',
+                  gap: '0.85rem'
+                }}
+              >
+                <div>
+                  <span style={{ fontSize: '0.72rem', color: 'var(--text-dim)', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.05em', display: 'block' }}>
+                    Official Application Fee
+                  </span>
+                  <div style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--primary)', lineHeight: 1.2, marginTop: '2px' }}>
+                    ₦{srv.totalPrice.toLocaleString()}
+                  </div>
+                </div>
+
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textAlign: 'right' }}>
+                  <div>Base Registry Fee: <strong style={{ color: 'var(--text-main)' }}>₦{srv.basePrice.toLocaleString()}</strong></div>
+                  <div>Portal Clearance & Stamp: <strong style={{ color: 'var(--text-main)' }}>₦{srv.serviceFee.toLocaleString()}</strong></div>
+                </div>
+              </div>
+
               {/* Customer Contact Section */}
-              <div style={{ marginBottom: '1.5rem' }}>
-                <h4 style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--primary)', marginBottom: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                  1. Applicant Information
+              <div className="form-section-card" style={{ marginBottom: '1.75rem' }}>
+                <h4 style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '1.25rem', paddingBottom: '0.75rem', borderBottom: '1px solid var(--border-subtle)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <span>1. Applicant Information</span>
                 </h4>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '0.75rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.25rem' }}>
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '4px' }}>
-                      Full Name *
+                    <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-main)', marginBottom: '0.45rem' }}>
+                      Full Name <span style={{ color: '#ef4444' }}>*</span>
                     </label>
                     <input
                       type="text"
@@ -306,8 +337,8 @@ export default function OrderServiceModal() {
                   </div>
 
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '4px' }}>
-                      Mobile Phone (SMS updates) *
+                    <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-main)', marginBottom: '0.45rem' }}>
+                      Mobile Phone (SMS updates) <span style={{ color: '#ef4444' }}>*</span>
                     </label>
                     <input
                       type="tel"
@@ -319,7 +350,7 @@ export default function OrderServiceModal() {
                   </div>
 
                   <div style={{ gridColumn: '1 / -1' }}>
-                    <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '4px' }}>
+                    <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-main)', marginBottom: '0.45rem' }}>
                       Email Address (Optional)
                     </label>
                     <input
@@ -333,16 +364,16 @@ export default function OrderServiceModal() {
               </div>
 
               {/* Dynamic Service Specific Fields */}
-              <div style={{ marginBottom: '1.5rem' }}>
-                <h4 style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--primary)', marginBottom: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                  2. {srv.name} Form Details
+              <div className="form-section-card" style={{ marginBottom: '1.75rem' }}>
+                <h4 style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '1.25rem', paddingBottom: '0.75rem', borderBottom: '1px solid var(--border-subtle)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <span>2. {srv.name} Form Details</span>
                 </h4>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                   {srv.fields.map((f) => (
                     <div key={f.id}>
-                      <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '4px' }}>
-                        {f.label} {f.required && '*'}
+                      <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-main)', marginBottom: '0.45rem' }}>
+                        {f.label} {f.required && <span style={{ color: '#ef4444' }}>*</span>}
                       </label>
                       {f.type === 'select' ? (
                         <select
@@ -358,6 +389,26 @@ export default function OrderServiceModal() {
                             </option>
                           ))}
                         </select>
+                      ) : f.type === 'textarea' ? (
+                        <textarea
+                          required={f.required}
+                          placeholder={f.placeholder}
+                          value={formData[f.id] || ''}
+                          onChange={(e) => handleFieldChange(f.id, e.target.value)}
+                          rows={3}
+                          style={{
+                            width: '100%',
+                            padding: '0.75rem 1rem',
+                            borderRadius: '10px',
+                            border: '1.5px solid var(--border-subtle)',
+                            background: 'var(--bg-surface)',
+                            color: 'var(--text-main)',
+                            fontSize: '0.9rem',
+                            resize: 'vertical',
+                            fontFamily: 'inherit',
+                            outline: 'none'
+                          }}
+                        />
                       ) : (
                         <input
                           type={f.type}
@@ -367,6 +418,11 @@ export default function OrderServiceModal() {
                           onChange={(e) => handleFieldChange(f.id, e.target.value)}
                         />
                       )}
+                      {f.helperText && (
+                        <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', margin: '4px 0 0' }}>
+                          {f.helperText}
+                        </p>
+                      )}
                     </div>
                   ))}
                 </div>
@@ -374,9 +430,9 @@ export default function OrderServiceModal() {
 
               {/* File Upload Section */}
               {srv.requiredDocTypes.length > 0 && (
-                <div style={{ marginBottom: '1.5rem' }}>
-                  <h4 style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--primary)', marginBottom: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                    3. Required Document Attachments
+                <div className="form-section-card" style={{ marginBottom: '1.75rem' }}>
+                  <h4 style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '1.25rem', paddingBottom: '0.75rem', borderBottom: '1px solid var(--border-subtle)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <span>3. Required Document Attachments</span>
                   </h4>
 
                   <div
@@ -468,18 +524,18 @@ export default function OrderServiceModal() {
               </div>
 
               {/* Payment Methods */}
-              <div style={{ marginBottom: '1.75rem' }}>
-                <h4 style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--primary)', marginBottom: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                  4. Select Payment Method
+              <div className="form-section-card" style={{ marginBottom: '1.75rem' }}>
+                <h4 style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '1.25rem', paddingBottom: '0.75rem', borderBottom: '1px solid var(--border-subtle)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <span>4. Select Payment Method</span>
                 </h4>
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0.5rem' }}>
                   {[
-                    { id: 'paystack', label: 'Paystack Card/Bank', icon: <CreditCard size={16} /> },
-                    { id: 'flutterwave', label: 'Flutterwave', icon: <Building size={16} /> },
-                    { id: 'bank_transfer', label: 'Direct Bank Transfer', icon: <Banknote size={16} /> },
-                    { id: 'cash', label: 'Cash at Counter', icon: <Banknote size={16} /> }
-                  ].map((method) => (
+                    { id: 'paystack', label: 'Paystack Card/Bank', icon: <CreditCard size={16} />, enabled: true },
+                    { id: 'flutterwave', label: 'Flutterwave', icon: <Building size={16} />, enabled: true },
+                    { id: 'bank_transfer', label: 'Direct Bank Transfer', icon: <Banknote size={16} />, enabled: siteSettings?.bankDetails?.allowTransfer ?? true },
+                    { id: 'cash', label: 'Cash at Counter', icon: <Banknote size={16} />, enabled: siteSettings?.bankDetails?.allowCashAtCounter ?? true }
+                  ].filter(m => m.enabled).map((method) => (
                     <button
                       key={method.id}
                       type="button"
@@ -505,8 +561,13 @@ export default function OrderServiceModal() {
                 </div>
 
                 {paymentMethod === 'bank_transfer' && (
-                  <div style={{ marginTop: '0.75rem', padding: '0.75rem', background: 'var(--bg-surface)', borderRadius: '8px', border: '1px solid var(--border-subtle)', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                    Transfer to: <strong style={{ color: 'var(--text-main)' }}>{CAFE_INFO.bankDetails.bankName}</strong> • Acc: <strong style={{ color: 'var(--primary)' }}>{CAFE_INFO.bankDetails.accountNumber}</strong> ({CAFE_INFO.bankDetails.accountName}). Admin confirms credit alert.
+                  <div style={{ marginTop: '0.75rem', padding: '0.85rem', background: 'var(--bg-surface)', borderRadius: '10px', border: '1px solid var(--border-subtle)', fontSize: '0.82rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
+                    Transfer to: <strong style={{ color: 'var(--text-main)' }}>{siteSettings?.bankDetails?.bankName || 'Moniepoint Microfinance Bank'}</strong> • Acc: <strong style={{ color: 'var(--primary)', fontSize: '0.95rem' }}>{siteSettings?.bankDetails?.accountNumber || '8166221330'}</strong> ({siteSettings?.bankDetails?.accountName || 'BJ SERVICES ENTERPRISE'}).
+                    {siteSettings?.bankDetails?.alternativeBank && (
+                      <div style={{ marginTop: '0.35rem', fontSize: '0.76rem', color: 'var(--text-dim)' }}>
+                        Alternative: {siteSettings.bankDetails.alternativeBank}
+                      </div>
+                    )}
                   </div>
                 )}
               </div>

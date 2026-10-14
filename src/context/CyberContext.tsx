@@ -12,12 +12,14 @@ import {
   Priority,
   AttachedFile,
   DemoUser,
-  UserProfile
+  UserProfile,
+  SiteSettings
 } from '../types';
 import { INITIAL_TASKS } from '../data/mockTasks';
 import { SERVICES_CATALOG } from '../data/services';
 import { WORKERS } from '../data/staff';
 import { DEMO_ACCOUNTS } from '../data/demoAccounts';
+import { DEFAULT_SITE_SETTINGS } from '../data/defaultSiteSettings';
 import { canTransition, STATUS_METADATA } from '../utils/stateMachine';
 import { createClient, isSupabaseConfigured } from '../lib/supabase/client';
 
@@ -75,6 +77,17 @@ interface CyberContextType {
   userProfiles: UserProfile[];
   fetchUserProfiles: () => Promise<UserProfile[]>;
   updateUserRole: (userId: string, newRole: UserRole) => Promise<{ success: boolean; error?: string }>;
+
+  // Service Catalog & Forms Management
+  createService: (serviceData: Omit<CyberService, 'id'> & { id?: string }) => CyberService;
+  updateService: (id: string, updates: Partial<CyberService>) => boolean;
+  deleteService: (id: string) => boolean;
+  resetServicesToDefault: () => void;
+
+  // Master Admin Site Controls & Live Content
+  siteSettings: SiteSettings;
+  updateSiteSettings: (updates: Partial<SiteSettings>) => void;
+  resetSiteSettings: () => void;
 }
 
 const CyberContext = createContext<CyberContextType | undefined>(undefined);
@@ -85,7 +98,172 @@ export function CyberProvider({ children }: { children: React.ReactNode }) {
   const [currentRole, setCurrentRoleState] = useState<UserRole>('customer');
   const [activeWorkerId, setActiveWorkerId] = useState<string>('worker-blessing');
   const [workers, setWorkers] = useState<Worker[]>(WORKERS);
-  const [services] = useState<CyberService[]>(SERVICES_CATALOG);
+  const [services, setServices] = useState<CyberService[]>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const stored = localStorage.getItem('bj_services_catalog');
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            return parsed;
+          }
+        }
+      } catch (e) {
+        console.error('Failed to parse stored services:', e);
+      }
+    }
+    return SERVICES_CATALOG;
+  });
+
+  const saveServices = (newServices: CyberService[]) => {
+    setServices(newServices);
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.setItem('bj_services_catalog', JSON.stringify(newServices));
+      } catch (e) {
+        console.error('Failed to save services to localStorage:', e);
+      }
+    }
+  };
+
+  const createService = (newServiceData: Omit<CyberService, 'id'> & { id?: string }): CyberService => {
+    const base = Number(newServiceData.basePrice) || 0;
+    const fee = Number(newServiceData.serviceFee) || 0;
+    const total = base + fee;
+
+    const id = (newServiceData.id?.trim() ||
+      newServiceData.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') + '-' + Date.now().toString().slice(-4));
+
+    const created: CyberService = {
+      ...newServiceData,
+      id,
+      basePrice: base,
+      serviceFee: fee,
+      totalPrice: total,
+      fields: newServiceData.fields || [],
+      requiredDocTypes: newServiceData.requiredDocTypes || [],
+      estimatedMinutes: Number(newServiceData.estimatedMinutes) || 20,
+      iconName: newServiceData.iconName || 'FileText',
+      category: newServiceData.category || 'Fees & Payments',
+      popular: newServiceData.popular ?? false
+    };
+
+    const updated = [created, ...services];
+    saveServices(updated);
+    showToast('Service & Form Created', `"${created.name}" is now live in the active catalog.`, 'success');
+    return created;
+  };
+
+  const updateService = (id: string, updates: Partial<CyberService>): boolean => {
+    const existing = services.find((s) => s.id === id);
+    if (!existing) return false;
+
+    const base = updates.basePrice !== undefined ? Number(updates.basePrice) : existing.basePrice;
+    const fee = updates.serviceFee !== undefined ? Number(updates.serviceFee) : existing.serviceFee;
+    const total = base + fee;
+
+    const updatedList = services.map((s) => {
+      if (s.id === id) {
+        return {
+          ...s,
+          ...updates,
+          basePrice: base,
+          serviceFee: fee,
+          totalPrice: total
+        };
+      }
+      return s;
+    });
+
+    saveServices(updatedList);
+    showToast('Service & Form Updated', `"${updates.name || existing.name}" has been updated successfully.`, 'success');
+    return true;
+  };
+
+  const deleteService = (id: string): boolean => {
+    const existing = services.find((s) => s.id === id);
+    if (!existing) return false;
+
+    const updatedList = services.filter((s) => s.id !== id);
+    saveServices(updatedList);
+    showToast('Service Removed', `"${existing.name}" was removed from the catalog.`, 'info');
+    return true;
+  };
+
+  const resetServicesToDefault = () => {
+    saveServices(SERVICES_CATALOG);
+    showToast('Catalog Reset', 'Services catalog restored to system defaults.', 'info');
+  };
+
+  const [siteSettings, setSiteSettings] = useState<SiteSettings>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const stored = localStorage.getItem('bj_site_settings');
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          return {
+            ...DEFAULT_SITE_SETTINGS,
+            ...parsed,
+            urgentBulletin: {
+              ...DEFAULT_SITE_SETTINGS.urgentBulletin,
+              ...(parsed.urgentBulletin || {})
+            },
+            bankDetails: {
+              ...DEFAULT_SITE_SETTINGS.bankDetails,
+              ...(parsed.bankDetails || {})
+            },
+            wifiRates: {
+              ...DEFAULT_SITE_SETTINGS.wifiRates,
+              ...(parsed.wifiRates || {})
+            },
+            contact: {
+              ...DEFAULT_SITE_SETTINGS.contact,
+              ...(parsed.contact || {})
+            }
+          };
+        }
+      } catch (e) {
+        console.error('Failed to parse stored site settings:', e);
+      }
+    }
+    return DEFAULT_SITE_SETTINGS;
+  });
+
+  const updateSiteSettings = (updates: Partial<SiteSettings>) => {
+    setSiteSettings((prev) => {
+      const updated: SiteSettings = {
+        ...prev,
+        ...updates,
+        urgentBulletin: updates.urgentBulletin ? { ...prev.urgentBulletin, ...updates.urgentBulletin } : prev.urgentBulletin,
+        bankDetails: updates.bankDetails ? { ...prev.bankDetails, ...updates.bankDetails } : prev.bankDetails,
+        wifiRates: updates.wifiRates ? { ...prev.wifiRates, ...updates.wifiRates } : prev.wifiRates,
+        contact: updates.contact ? { ...prev.contact, ...updates.contact } : prev.contact
+      };
+
+      if (typeof window !== 'undefined') {
+        try {
+          localStorage.setItem('bj_site_settings', JSON.stringify(updated));
+        } catch (e) {
+          console.error('Failed to save site settings to localStorage:', e);
+        }
+      }
+      return updated;
+    });
+
+    showToast('Site Settings Updated', 'Live site configuration and content have been saved successfully.', 'success');
+  };
+
+  const resetSiteSettings = () => {
+    setSiteSettings(DEFAULT_SITE_SETTINGS);
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.removeItem('bj_site_settings');
+      } catch (e) {
+        console.error('Failed to reset site settings in localStorage:', e);
+      }
+    }
+    showToast('Settings Reset', 'Live website content has been restored to factory defaults.', 'info');
+  };
   const [notifications, setNotifications] = useState<AppNotification[]>([
     {
       id: 'notif-1',
@@ -702,7 +880,14 @@ export function CyberProvider({ children }: { children: React.ReactNode }) {
         supabaseConfigured,
         userProfiles,
         fetchUserProfiles,
-        updateUserRole
+        updateUserRole,
+        createService,
+        updateService,
+        deleteService,
+        resetServicesToDefault,
+        siteSettings,
+        updateSiteSettings,
+        resetSiteSettings
       }}
     >
       {children}

@@ -73,11 +73,11 @@ export default function PostUtmeForm({ onSuccess, standalone = true }: PostUtmeF
   };
 
   return (
-    <div className={standalone ? "official-form-container max-w-3xl mx-auto p-4 sm:p-6 md:p-8 bg-white shadow-xl rounded-2xl border border-slate-200 w-full" : "w-full"}>
+    <div className={standalone ? "official-form-container max-w-3xl mx-auto p-5 sm:p-7 md:p-9 bg-white shadow-xl rounded-2xl border border-slate-200 w-full" : "w-full"}>
       {/* Header Badge */}
       {standalone && (
-        <div className="text-center mb-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold uppercase tracking-wider mb-2">
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold uppercase tracking-wider mb-2.5">
             <ShieldCheck size={14} className="text-rose-600" />
             <span>BJ Services • Accredited FUTO CBT & Registration Hub</span>
           </div>
@@ -91,29 +91,32 @@ export default function PostUtmeForm({ onSuccess, standalone = true }: PostUtmeF
       )}
 
       {/* Mandatory JAMB CAPS Warning Banner */}
-      <div className="p-3.5 sm:p-4 rounded-xl bg-amber-50 border border-amber-200 mb-5 sm:mb-6 flex items-start gap-3">
+      <div className="p-4 sm:p-5 rounded-2xl bg-amber-50 border border-amber-200 mb-6 flex items-start gap-3.5">
         <AlertCircle size={20} className="text-amber-600 shrink-0 mt-0.5" />
         <div className="text-xs text-amber-900 leading-relaxed">
-          <strong className="font-extrabold uppercase tracking-wide block mb-0.5">
+          <strong className="font-extrabold uppercase tracking-wide block mb-1">
             Mandatory O&apos;Level JAMB CAPS Verification:
           </strong>
           Make sure your complete WAEC/NECO/NABTEB grades are uploaded to the JAMB central admission portal. BJ Services verifies and uploads this simultaneously to prevent admission forfeitures.
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-6">
         {/* Section 1: Candidate Identity */}
-        <div className="p-3.5 sm:p-5 rounded-xl bg-slate-50 border border-slate-200/80">
-          <div className="flex items-center gap-2 mb-3.5 pb-2 border-b border-slate-200">
-            <User size={18} className="text-blue-600 shrink-0" />
-            <h3 className="text-xs font-extrabold text-slate-800 uppercase tracking-wider">
-              1. Candidate Biodata & Preferred Course
-            </h3>
+        <div className="form-section-card">
+          <div className="form-section-header">
+            <div className="form-section-icon" style={{ background: '#fff1f2', color: '#e11d48' }}>
+              <User size={18} />
+            </div>
+            <div>
+              <h3 className="form-section-title">1. Candidate Biodata & Preferred Course</h3>
+              <p className="text-xs text-slate-500">Provide basic identity details as registered on JAMB</p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
             <div>
-              <label>Surname *</label>
+              <label>Surname <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="surname"
@@ -124,7 +127,7 @@ export default function PostUtmeForm({ onSuccess, standalone = true }: PostUtmeF
               />
             </div>
             <div>
-              <label>First Name *</label>
+              <label>First Name <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="firstName"
@@ -146,9 +149,9 @@ export default function PostUtmeForm({ onSuccess, standalone = true }: PostUtmeF
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mt-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
             <div>
-              <label>Date of Birth *</label>
+              <label>Date of Birth <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="date"
                 name="dateOfBirth"
@@ -158,14 +161,14 @@ export default function PostUtmeForm({ onSuccess, standalone = true }: PostUtmeF
               />
             </div>
             <div>
-              <label>Gender / Sex *</label>
+              <label>Gender / Sex <span className="text-red-500 font-bold">*</span></label>
               <select name="sex" className="form-select" value={formData.sex} onChange={handleChange} required>
                 <option value="MALE">Male</option>
                 <option value="FEMALE">Female</option>
               </select>
             </div>
             <div>
-              <label>State of Origin *</label>
+              <label>State of Origin <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="stateOfOrigin"
@@ -176,7 +179,7 @@ export default function PostUtmeForm({ onSuccess, standalone = true }: PostUtmeF
               />
             </div>
             <div>
-              <label>L.G.A *</label>
+              <label>L.G.A <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="lga"
@@ -188,8 +191,8 @@ export default function PostUtmeForm({ onSuccess, standalone = true }: PostUtmeF
             </div>
           </div>
 
-          <div className="mt-3">
-            <label>First Choice Course of Study in FUTO *</label>
+          <div>
+            <label>First Choice Course of Study in FUTO <span className="text-red-500 font-bold">*</span></label>
             <input
               type="text"
               name="course"
@@ -202,17 +205,20 @@ export default function PostUtmeForm({ onSuccess, standalone = true }: PostUtmeF
         </div>
 
         {/* Section 2: JAMB & Contact Information */}
-        <div className="p-3.5 sm:p-5 rounded-xl bg-slate-50 border border-slate-200/80">
-          <div className="flex items-center gap-2 mb-3.5 pb-2 border-b border-slate-200">
-            <Phone size={18} className="text-blue-600 shrink-0" />
-            <h3 className="text-xs font-extrabold text-slate-800 uppercase tracking-wider">
-              2. JAMB Registration & Contact Details
-            </h3>
+        <div className="form-section-card">
+          <div className="form-section-header">
+            <div className="form-section-icon" style={{ background: '#fff1f2', color: '#e11d48' }}>
+              <Phone size={18} />
+            </div>
+            <div>
+              <h3 className="form-section-title">2. JAMB Registration & Contact Details</h3>
+              <p className="text-xs text-slate-500">Official candidate credentials for portal validation</p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
             <div>
-              <label>JAMB Registration Number *</label>
+              <label>JAMB Registration Number <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="jambRegNo"
@@ -224,7 +230,7 @@ export default function PostUtmeForm({ onSuccess, standalone = true }: PostUtmeF
               />
             </div>
             <div>
-              <label>WhatsApp / Phone Number *</label>
+              <label>WhatsApp / Phone Number <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="tel"
                 name="phoneNo"
@@ -235,7 +241,7 @@ export default function PostUtmeForm({ onSuccess, standalone = true }: PostUtmeF
               />
             </div>
             <div>
-              <label>Email Address *</label>
+              <label>Email Address <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="email"
                 name="email"
@@ -247,7 +253,7 @@ export default function PostUtmeForm({ onSuccess, standalone = true }: PostUtmeF
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label>National ID No. (NIN)</label>
               <input
@@ -261,7 +267,7 @@ export default function PostUtmeForm({ onSuccess, standalone = true }: PostUtmeF
               />
             </div>
             <div>
-              <label>Candidate Contact Address *</label>
+              <label>Candidate Contact Address <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="candidateContactAddress"
@@ -275,17 +281,20 @@ export default function PostUtmeForm({ onSuccess, standalone = true }: PostUtmeF
         </div>
 
         {/* Section 3: Sponsor Profile */}
-        <div className="p-3.5 sm:p-5 rounded-xl bg-slate-50 border border-slate-200/80">
-          <div className="flex items-center gap-2 mb-3.5 pb-2 border-b border-slate-200">
-            <User size={18} className="text-blue-600 shrink-0" />
-            <h3 className="text-xs font-extrabold text-slate-800 uppercase tracking-wider">
-              3. Parent / Sponsor Profile
-            </h3>
+        <div className="form-section-card">
+          <div className="form-section-header">
+            <div className="form-section-icon" style={{ background: '#fff1f2', color: '#e11d48' }}>
+              <User size={18} />
+            </div>
+            <div>
+              <h3 className="form-section-title">3. Parent / Sponsor Profile</h3>
+              <p className="text-xs text-slate-500">Contact details for guardian or sponsor</p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <label>Sponsor Full Name *</label>
+              <label>Sponsor Full Name <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="sponsorName"
@@ -296,7 +305,7 @@ export default function PostUtmeForm({ onSuccess, standalone = true }: PostUtmeF
               />
             </div>
             <div>
-              <label>Relationship *</label>
+              <label>Relationship <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="sponsorRelationship"
@@ -307,7 +316,7 @@ export default function PostUtmeForm({ onSuccess, standalone = true }: PostUtmeF
               />
             </div>
             <div>
-              <label>Sponsor Phone Number *</label>
+              <label>Sponsor Phone Number <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="tel"
                 name="sponsorPhoneNo"
@@ -321,22 +330,25 @@ export default function PostUtmeForm({ onSuccess, standalone = true }: PostUtmeF
         </div>
 
         {/* Section 4: 1st Sitting O'Level */}
-        <div className="p-3.5 sm:p-5 rounded-xl bg-slate-50 border border-slate-200/80">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-3.5 pb-2 border-b border-slate-200 gap-2">
-            <div className="flex items-center gap-2">
-              <Award size={18} className="text-rose-600 shrink-0" />
-              <h3 className="text-xs font-extrabold text-slate-800 uppercase tracking-wider">
-                4. 1st Sitting O&apos;Level Scratch Card & Examination
-              </h3>
+        <div className="form-section-card">
+          <div className="form-section-header flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div className="flex items-center gap-3">
+              <div className="form-section-icon" style={{ background: '#fff1f2', color: '#e11d48' }}>
+                <Award size={18} />
+              </div>
+              <div>
+                <h3 className="form-section-title">4. 1st Sitting O&apos;Level Scratch Card & Examination</h3>
+                <p className="text-xs text-slate-500">Required for official online result verification</p>
+              </div>
             </div>
-            <span className="self-start sm:self-auto text-[10px] font-bold bg-rose-100 text-rose-700 px-2 py-0.5 rounded border border-rose-200">
+            <span className="self-start sm:self-auto text-[10px] font-bold bg-rose-100 text-rose-700 px-2.5 py-1 rounded border border-rose-200">
               WAEC / NECO / NABTEB
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
             <div>
-              <label>Scratch Card PIN *</label>
+              <label>Scratch Card PIN <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="sitting1Pin"
@@ -347,7 +359,7 @@ export default function PostUtmeForm({ onSuccess, standalone = true }: PostUtmeF
               />
             </div>
             <div>
-              <label>Scratch Card Serial Number *</label>
+              <label>Scratch Card Serial Number <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="sitting1SerialNo"
@@ -359,9 +371,9 @@ export default function PostUtmeForm({ onSuccess, standalone = true }: PostUtmeF
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <label>Exam Centre Name / Code *</label>
+              <label>Exam Centre Name / Code <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="sitting1ExamCenter"
@@ -371,7 +383,7 @@ export default function PostUtmeForm({ onSuccess, standalone = true }: PostUtmeF
               />
             </div>
             <div>
-              <label>Examination Number *</label>
+              <label>Examination Number <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="sitting1ExamNo"
@@ -382,7 +394,7 @@ export default function PostUtmeForm({ onSuccess, standalone = true }: PostUtmeF
               />
             </div>
             <div>
-              <label>Exam Year *</label>
+              <label>Exam Year <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="sitting1Year"
@@ -395,20 +407,23 @@ export default function PostUtmeForm({ onSuccess, standalone = true }: PostUtmeF
         </div>
 
         {/* Section 5: 2nd Sitting O'Level (Optional) */}
-        <div className="p-3.5 sm:p-5 rounded-xl bg-slate-50 border border-slate-200/80">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-3.5 pb-2 border-b border-slate-200 gap-2">
-            <div className="flex items-center gap-2">
-              <Award size={18} className="text-slate-500 shrink-0" />
-              <h3 className="text-xs font-extrabold text-slate-700 uppercase tracking-wider">
-                5. 2nd Sitting O&apos;Level Examination (Optional)
-              </h3>
+        <div className="form-section-card">
+          <div className="form-section-header flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div className="flex items-center gap-3">
+              <div className="form-section-icon" style={{ background: '#f1f5f9', color: '#64748b' }}>
+                <Award size={18} />
+              </div>
+              <div>
+                <h3 className="form-section-title">5. 2nd Sitting O&apos;Level Examination (Optional)</h3>
+                <p className="text-xs text-slate-500">Fill only if combining results across two sittings</p>
+              </div>
             </div>
-            <span className="self-start sm:self-auto text-[10px] font-bold bg-slate-200 text-slate-600 px-2 py-0.5 rounded">
+            <span className="self-start sm:self-auto text-[10px] font-bold bg-slate-100 text-slate-600 px-2.5 py-1 rounded border border-slate-200">
               If Combining Results
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
             <div>
               <label>Scratch Card PIN</label>
               <input
@@ -433,7 +448,7 @@ export default function PostUtmeForm({ onSuccess, standalone = true }: PostUtmeF
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <label>Exam Centre Name / Code</label>
               <input
@@ -469,7 +484,7 @@ export default function PostUtmeForm({ onSuccess, standalone = true }: PostUtmeF
         </div>
 
         {/* Official Fee Summary */}
-        <div className="p-4 sm:p-5 rounded-xl bg-rose-50/70 border border-rose-200">
+        <div className="p-5 sm:p-6 rounded-2xl bg-rose-50/80 border border-rose-200 mb-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
               <div className="flex items-center gap-2">

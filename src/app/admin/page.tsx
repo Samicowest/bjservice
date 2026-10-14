@@ -5,12 +5,14 @@ import Link from 'next/link';
 import { useCyber } from '../../context/CyberContext';
 import AdminDashboardView from '../../components/AdminDashboardView';
 import SuperAdminView from '../../components/SuperAdminView';
+import ServiceManagerView from '../../components/ServiceManagerView';
+import SiteSettingsView from '../../components/SiteSettingsView';
 import Breadcrumb from '../../components/Breadcrumb';
-import { ShieldCheck, ArrowRight, Settings, Users, CreditCard } from 'lucide-react';
+import { ShieldCheck, ArrowRight, Settings, Users, CreditCard, Layers, Sliders } from 'lucide-react';
 
 export default function AdminPage() {
   const { isLoggedIn, currentRole, setActiveModal } = useCyber();
-  const [subTab, setSubTab] = useState<'manager' | 'system'>('manager');
+  const [subTab, setSubTab] = useState<'manager' | 'services' | 'settings' | 'system'>('manager');
 
   const isAdminRole = currentRole === 'admin' || currentRole === 'super_admin';
 
@@ -68,8 +70,8 @@ export default function AdminPage() {
         </div>
       ) : (
         <div>
-          {/* Sub Tab Switcher for Admin vs System Configuration */}
-          <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.5rem', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '0.75rem' }}>
+          {/* Sub Tab Switcher for Admin vs Services Studio vs System Configuration */}
+          <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.5rem', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '0.75rem', flexWrap: 'wrap' }}>
             <button
               onClick={() => setSubTab('manager')}
               style={{
@@ -91,6 +93,46 @@ export default function AdminPage() {
             </button>
 
             <button
+              onClick={() => setSubTab('services')}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.45rem',
+                padding: '0.55rem 1.15rem',
+                borderRadius: '9999px',
+                fontSize: '0.82rem',
+                fontWeight: 700,
+                cursor: 'pointer',
+                border: subTab === 'services' ? '1.5px solid var(--primary)' : '1px solid var(--border-subtle)',
+                background: subTab === 'services' ? 'var(--primary-light)' : 'var(--bg-card)',
+                color: subTab === 'services' ? 'var(--primary)' : 'var(--text-muted)'
+              }}
+            >
+              <Layers size={14} />
+              <span>Services & Forms Studio</span>
+            </button>
+
+            <button
+              onClick={() => setSubTab('settings')}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.45rem',
+                padding: '0.55rem 1.15rem',
+                borderRadius: '9999px',
+                fontSize: '0.82rem',
+                fontWeight: 700,
+                cursor: 'pointer',
+                border: subTab === 'settings' ? '1.5px solid #10b981' : '1px solid var(--border-subtle)',
+                background: subTab === 'settings' ? '#f0fdf4' : 'var(--bg-card)',
+                color: subTab === 'settings' ? '#15803d' : 'var(--text-muted)'
+              }}
+            >
+              <Sliders size={14} />
+              <span>Master Site Controls</span>
+            </button>
+
+            <button
               onClick={() => setSubTab('system')}
               style={{
                 display: 'inline-flex',
@@ -107,11 +149,14 @@ export default function AdminPage() {
               }}
             >
               <Settings size={14} />
-              <span>System & Audit Configuration</span>
+              <span>Executive Suite & Audit</span>
             </button>
           </div>
 
-          {subTab === 'manager' ? <AdminDashboardView /> : <SuperAdminView />}
+          {subTab === 'manager' && <AdminDashboardView />}
+          {subTab === 'services' && <ServiceManagerView />}
+          {subTab === 'settings' && <SiteSettingsView />}
+          {subTab === 'system' && <SuperAdminView />}
         </div>
       )}
     </div>

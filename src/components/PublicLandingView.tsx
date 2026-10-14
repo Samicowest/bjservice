@@ -30,7 +30,7 @@ import {
 } from 'lucide-react';
 
 export default function PublicLandingView() {
-  const { setActiveModal, setSelectedServiceForOrder, services } = useCyber();
+  const { setActiveModal, setSelectedServiceForOrder, services, siteSettings } = useCyber();
   const [activeCatalogCategory, setActiveCatalogCategory] = useState('All');
   const [catalogSearch, setCatalogSearch] = useState('');
 
@@ -211,8 +211,8 @@ export default function PublicLandingView() {
             }}
           >
             <Sparkles size={14} color="var(--accent-orange)" style={{ flexShrink: 0 }} />
-            <span className="hero-badge-full">BJ SERVICES (UNLIMITED GRACE & MERCY) • FUTO</span>
-            <span className="hero-badge-mobile">BJ SERVICES • FUTO DIGITAL HUB</span>
+            <span className="hero-badge-full">{siteSettings?.heroBadge || 'BJ SERVICES (UNLIMITED GRACE & MERCY) • FUTO'}</span>
+            <span className="hero-badge-mobile">{siteSettings?.heroBadgeMobile || 'BJ SERVICES • FUTO DIGITAL HUB'}</span>
           </div>
 
           {/* Heading - Fluid scale, wraps cleanly */}
@@ -278,7 +278,7 @@ export default function PublicLandingView() {
                 textDecoration: 'none'
               }}
             >
-              <span className="hero-btn-full">Explore All Services & Order</span>
+              <span className="hero-btn-full">Explore All Services & Apply</span>
               <span className="hero-btn-mobile">Explore Services</span>
               <ArrowRight size={17} style={{ flexShrink: 0 }} />
             </Link>
@@ -384,6 +384,121 @@ export default function PublicLandingView() {
           ))}
         </div>
       </section>
+
+      {/* 2.5 LIVE CAMPUS URGENT BULLETIN BANNER (Managed by Master Admin) */}
+      {siteSettings?.urgentBulletin?.active && (
+        <section style={{ marginBottom: 'clamp(2rem, 4vw, 3rem)' }}>
+          <div
+            className="glass-card"
+            style={{
+              padding: 'clamp(1rem, 2.5vw, 1.5rem) clamp(1.25rem, 3vw, 2rem)',
+              borderRadius: '20px',
+              background:
+                siteSettings.urgentBulletin.type === 'alert'
+                  ? 'linear-gradient(135deg, #fef2f2 0%, #ffffff 100%)'
+                  : siteSettings.urgentBulletin.type === 'warning'
+                  ? 'linear-gradient(135deg, #fffbeb 0%, #ffffff 100%)'
+                  : siteSettings.urgentBulletin.type === 'success'
+                  ? 'linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%)'
+                  : 'linear-gradient(135deg, #eff6ff 0%, #ffffff 100%)',
+              border: `1.5px solid ${
+                siteSettings.urgentBulletin.type === 'alert'
+                  ? '#fca5a5'
+                  : siteSettings.urgentBulletin.type === 'warning'
+                  ? '#fcd34d'
+                  : siteSettings.urgentBulletin.type === 'success'
+                  ? '#86efac'
+                  : '#93c5fd'
+              }`,
+              boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '1.25rem',
+              flexWrap: 'wrap'
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flex: '1 1 300px' }}>
+              <div
+                style={{
+                  width: '46px',
+                  height: '46px',
+                  borderRadius: '12px',
+                  background:
+                    siteSettings.urgentBulletin.type === 'alert'
+                      ? '#fee2e2'
+                      : siteSettings.urgentBulletin.type === 'warning'
+                      ? '#fef3c7'
+                      : siteSettings.urgentBulletin.type === 'success'
+                      ? '#dcfce7'
+                      : '#dbeafe',
+                  color:
+                    siteSettings.urgentBulletin.type === 'alert'
+                      ? '#dc2626'
+                      : siteSettings.urgentBulletin.type === 'warning'
+                      ? '#d97706'
+                      : siteSettings.urgentBulletin.type === 'success'
+                      ? '#16a34a'
+                      : '#0284c7',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0
+                }}
+              >
+                <AlertTriangle size={24} />
+              </div>
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.2rem', flexWrap: 'wrap' }}>
+                  <span
+                    style={{
+                      fontSize: '0.68rem',
+                      fontWeight: 800,
+                      padding: '0.15rem 0.5rem',
+                      borderRadius: '9999px',
+                      background:
+                        siteSettings.urgentBulletin.type === 'alert'
+                          ? '#fca5a5'
+                          : siteSettings.urgentBulletin.type === 'warning'
+                          ? '#fde68a'
+                          : siteSettings.urgentBulletin.type === 'success'
+                          ? '#bbf7d0'
+                          : '#bfdbfe',
+                      color:
+                        siteSettings.urgentBulletin.type === 'alert'
+                          ? '#991b1b'
+                          : siteSettings.urgentBulletin.type === 'warning'
+                          ? '#92400e'
+                          : siteSettings.urgentBulletin.type === 'success'
+                          ? '#166534'
+                          : '#1e40af'
+                    }}
+                  >
+                    {siteSettings.urgentBulletin.badge || 'CAMPUS BULLETIN'}
+                  </span>
+                  <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-main)', margin: 0 }}>
+                    {siteSettings.urgentBulletin.title}
+                  </h3>
+                </div>
+                <p style={{ fontSize: '0.86rem', color: 'var(--text-muted)', margin: 0, lineHeight: 1.5 }}>
+                  {siteSettings.urgentBulletin.message}
+                </p>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexShrink: 0 }}>
+              <Link
+                href="/services"
+                className="btn btn-primary btn-sm"
+                style={{ borderRadius: '9999px', padding: '0.55rem 1.15rem', fontSize: '0.82rem', fontWeight: 700, textDecoration: 'none' }}
+              >
+                <span>Take Action Now</span>
+                <ArrowRight size={14} />
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* 3. URGENT DEADLINES & UPCOMING TIMELINES RADAR */}
       <section id="deadlines" style={{ marginBottom: '4rem' }}>
@@ -1314,7 +1429,7 @@ export default function PublicLandingView() {
                     className="btn btn-primary btn-sm"
                     style={{ width: '100%', borderRadius: '9999px', padding: '0.55rem 1rem', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.45rem', fontWeight: 700 }}
                   >
-                    <span>Order Now</span>
+                    <span>Apply Now</span>
                     <ArrowRight size={14} />
                   </button>
                 </div>

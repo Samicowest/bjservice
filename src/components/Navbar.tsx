@@ -21,7 +21,9 @@ import {
   ChevronRight,
   ChevronDown,
   LogOut,
-  UserCheck
+  UserCheck,
+  Megaphone,
+  AlertTriangle
 } from 'lucide-react';
 
 export default function Navbar() {
@@ -33,11 +35,13 @@ export default function Navbar() {
     isLoggedIn,
     unreadNotificationCount,
     setActiveModal,
-    logout
+    logout,
+    siteSettings
   } = useCyber();
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
+  const [bulletinDismissed, setBulletinDismissed] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Close profile dropdown on outside click
@@ -77,6 +81,68 @@ export default function Navbar() {
 
   return (
     <header style={{ position: 'sticky', top: 0, zIndex: 100, backgroundColor: 'var(--bg-surface)', boxShadow: '0 2px 10px rgba(0,0,0,0.04)' }}>
+      {/* 0. Live Campus Urgent Bulletin Banner */}
+      {siteSettings?.urgentBulletin?.active && !bulletinDismissed && (
+        <div
+          style={{
+            background:
+              siteSettings.urgentBulletin.type === 'alert'
+                ? 'linear-gradient(90deg, #991b1b 0%, #dc2626 100%)'
+                : siteSettings.urgentBulletin.type === 'warning'
+                ? 'linear-gradient(90deg, #b45309 0%, #d97706 100%)'
+                : siteSettings.urgentBulletin.type === 'success'
+                ? 'linear-gradient(90deg, #15803d 0%, #16a34a 100%)'
+                : 'linear-gradient(90deg, #1e40af 0%, #2563eb 100%)',
+            color: '#ffffff',
+            padding: '0.45rem clamp(0.75rem, 3vw, 1.5rem)',
+            fontSize: '0.78rem',
+            fontWeight: 600,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '0.75rem',
+            zIndex: 101,
+            position: 'relative'
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flex: 1, minWidth: 0 }}>
+            <span
+              style={{
+                fontSize: '0.65rem',
+                fontWeight: 800,
+                background: 'rgba(255,255,255,0.25)',
+                padding: '0.15rem 0.45rem',
+                borderRadius: '4px',
+                letterSpacing: '0.04em',
+                flexShrink: 0
+              }}
+            >
+              {siteSettings.urgentBulletin.badge || 'BULLETIN'}
+            </span>
+            <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              <strong>{siteSettings.urgentBulletin.title}:</strong> {siteSettings.urgentBulletin.message}
+            </div>
+          </div>
+          <button
+            onClick={() => setBulletinDismissed(true)}
+            style={{
+              background: 'transparent',
+              border: 'none',
+              color: 'rgba(255,255,255,0.85)',
+              cursor: 'pointer',
+              padding: '2px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0
+            }}
+            aria-label="Dismiss bulletin"
+          >
+            <X size={15} />
+          </button>
+        </div>
+      )}
+
       {/* Main Single Navigation Bar */}
       <div
         className="container"
@@ -469,40 +535,48 @@ export default function Navbar() {
         </div>
       )}
 
-      {/* Campus Announcement Marquee Ticker (With Clickable Links) */}
-      <div
-        style={{
-          backgroundColor: 'var(--bg-inset)',
-          borderBottom: '2px solid var(--accent-orange)',
-          padding: '6px 0',
-          overflow: 'hidden',
-          whiteSpace: 'nowrap',
-          fontSize: '0.82rem',
-          fontWeight: 600,
-          color: 'var(--text-muted)'
-        }}
-      >
-        <div className="marquee-track" style={{ display: 'inline-block', animation: 'marqueeScroll 55s linear infinite' }}>
-          <Link href="/services" style={{ color: '#0284c7', marginRight: '3.5rem', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-            <Flame size={14} color="#ea580c" /> BJ Services (Unlimited Grace & Mercy) — FUTO Old Registry Beside PPRC
-          </Link>
-          <Link href="/services" style={{ color: '#059669', marginRight: '3.5rem', textDecoration: 'none' }}>
-            🎓 Accredited NYSC Registration & Mobilization Center →
-          </Link>
-          <Link href="/forms?type=school_fees" style={{ color: '#d97706', marginRight: '3.5rem', textDecoration: 'none' }}>
-            ⚡ 2025/2026 FUTO Acceptance & School Fees Remita Portal Active →
-          </Link>
-          <Link href="/forms?type=transcript" style={{ color: '#2563eb', marginRight: '3.5rem', textDecoration: 'none' }}>
-            📜 Official Academic Transcript & Supplementary Form Desk →
-          </Link>
-          <Link href="/workspace" style={{ color: '#ea580c', marginRight: '3.5rem', textDecoration: 'none' }}>
-            🏢 Tech & Academic Workspace Hub with 150 Mbps Fibre WiFi & Generator Backup →
-          </Link>
-          <Link href="/portal" style={{ color: '#7c3aed', marginRight: '3.5rem', textDecoration: 'none' }}>
-            🎓 Student Portal & Real-Time Application Tracking Pipeline →
-          </Link>
+      {/* Campus Announcement Marquee Ticker (With Master Admin Dynamic Announcements) */}
+      {siteSettings?.showTicker && (
+        <div
+          style={{
+            backgroundColor: 'var(--bg-inset)',
+            borderBottom: '2px solid var(--accent-orange)',
+            padding: '6px 0',
+            overflow: 'hidden',
+            whiteSpace: 'nowrap',
+            fontSize: '0.82rem',
+            fontWeight: 600,
+            color: 'var(--text-muted)'
+          }}
+        >
+          <div className="marquee-track" style={{ display: 'inline-block', animation: 'marqueeScroll 55s linear infinite' }}>
+            {siteSettings.announcementTicker && (
+              <span style={{ color: '#0284c7', marginRight: '3.5rem', display: 'inline-flex', alignItems: 'center', gap: '0.45rem', fontWeight: 700 }}>
+                <Megaphone size={14} color="var(--primary)" />
+                <span>{siteSettings.announcementTicker}</span>
+              </span>
+            )}
+            <Link href="/services" style={{ color: '#0284c7', marginRight: '3.5rem', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+              <Flame size={14} color="#ea580c" /> {siteSettings?.brandName || 'BJ Services'} ({siteSettings?.tagline || 'Unlimited Grace & Mercy'}) — FUTO Old Registry Beside PPRC
+            </Link>
+            <Link href="/services" style={{ color: '#059669', marginRight: '3.5rem', textDecoration: 'none' }}>
+              🎓 Accredited NYSC Registration & Mobilization Center →
+            </Link>
+            <Link href="/forms?type=school_fees" style={{ color: '#d97706', marginRight: '3.5rem', textDecoration: 'none' }}>
+              ⚡ 2025/2026 FUTO Acceptance & School Fees Remita Portal Active →
+            </Link>
+            <Link href="/forms?type=transcript" style={{ color: '#2563eb', marginRight: '3.5rem', textDecoration: 'none' }}>
+              📜 Official Academic Transcript & Supplementary Form Desk →
+            </Link>
+            <Link href="/workspace" style={{ color: '#ea580c', marginRight: '3.5rem', textDecoration: 'none' }}>
+              🏢 Tech & Academic Workspace Hub with 150 Mbps Fibre WiFi & Generator Backup →
+            </Link>
+            <Link href="/portal" style={{ color: '#7c3aed', marginRight: '3.5rem', textDecoration: 'none' }}>
+              🎓 Student Portal & Real-Time Application Tracking Pipeline →
+            </Link>
+          </div>
         </div>
-      </div>
+      )}
 
       <style jsx>{`
         .marquee-track:hover {

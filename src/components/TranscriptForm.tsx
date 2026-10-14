@@ -58,11 +58,11 @@ export default function TranscriptForm({ onSuccess, standalone = true }: Transcr
   };
 
   return (
-    <div className={standalone ? "official-form-container max-w-3xl mx-auto p-4 sm:p-6 md:p-8 bg-white shadow-xl rounded-2xl border border-slate-200 w-full" : "w-full"}>
-      {/* Header Badge (Shown if standalone or as section title) */}
+    <div className={standalone ? "official-form-container max-w-3xl mx-auto p-5 sm:p-7 md:p-9 bg-white shadow-xl rounded-2xl border border-slate-200 w-full" : "w-full"}>
+      {/* Header Badge (Shown if standalone) */}
       {standalone && (
-        <div className="text-center mb-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-bold uppercase tracking-wider mb-2">
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-bold uppercase tracking-wider mb-2.5">
             <ShieldCheck size={14} className="text-blue-600" />
             <span>BJ Services • Official FUTO Registry Desk</span>
           </div>
@@ -75,19 +75,22 @@ export default function TranscriptForm({ onSuccess, standalone = true }: Transcr
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-6">
         {/* Section 1: Academic & Student Identity */}
-        <div className="p-3.5 sm:p-5 rounded-xl bg-slate-50 border border-slate-200/80">
-          <div className="flex items-center gap-2 mb-3.5 pb-2 border-b border-slate-200">
-            <GraduationCap size={18} className="text-blue-600 shrink-0" />
-            <h3 className="text-xs font-extrabold text-slate-800 uppercase tracking-wider">
-              1. Student & Academic Profile
-            </h3>
+        <div className="form-section-card">
+          <div className="form-section-header">
+            <div className="form-section-icon">
+              <GraduationCap size={18} />
+            </div>
+            <div>
+              <h3 className="form-section-title">1. Student & Academic Profile</h3>
+              <p className="text-xs text-slate-500">Provide accurate details matching your official FUTO student records</p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
             <div>
-              <label>Last Name / Surname *</label>
+              <label>Last Name / Surname <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="lastName"
@@ -98,7 +101,7 @@ export default function TranscriptForm({ onSuccess, standalone = true }: Transcr
               />
             </div>
             <div>
-              <label>First Name *</label>
+              <label>First Name <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="firstName"
@@ -120,9 +123,9 @@ export default function TranscriptForm({ onSuccess, standalone = true }: Transcr
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
             <div>
-              <label>Matriculation Number *</label>
+              <label>Matriculation Number <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="matricNumber"
@@ -134,7 +137,7 @@ export default function TranscriptForm({ onSuccess, standalone = true }: Transcr
               />
             </div>
             <div>
-              <label>Department / Discipline *</label>
+              <label>Department / Discipline <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="department"
@@ -146,9 +149,9 @@ export default function TranscriptForm({ onSuccess, standalone = true }: Transcr
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label>Programme of Study *</label>
+              <label>Programme of Study <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="programme"
@@ -159,7 +162,7 @@ export default function TranscriptForm({ onSuccess, standalone = true }: Transcr
               />
             </div>
             <div>
-              <label>Graduation Date (or Month/Year) *</label>
+              <label>Graduation Date (or Month/Year) <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="dateOfGraduation"
@@ -173,17 +176,20 @@ export default function TranscriptForm({ onSuccess, standalone = true }: Transcr
         </div>
 
         {/* Section 2: Contact Details */}
-        <div className="p-3.5 sm:p-5 rounded-xl bg-slate-50 border border-slate-200/80">
-          <div className="flex items-center gap-2 mb-3.5 pb-2 border-b border-slate-200">
-            <Phone size={18} className="text-blue-600 shrink-0" />
-            <h3 className="text-xs font-extrabold text-slate-800 uppercase tracking-wider">
-              2. Applicant Contact Information
-            </h3>
+        <div className="form-section-card">
+          <div className="form-section-header">
+            <div className="form-section-icon">
+              <Phone size={18} />
+            </div>
+            <div>
+              <h3 className="form-section-title">2. Applicant Contact Information</h3>
+              <p className="text-xs text-slate-500">For SMS updates and official verification confirmations</p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label>Active WhatsApp / Phone Number *</label>
+              <label>Active WhatsApp / Phone Number <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="tel"
                 name="phoneNumber"
@@ -194,7 +200,7 @@ export default function TranscriptForm({ onSuccess, standalone = true }: Transcr
               />
             </div>
             <div>
-              <label>Official Email Address *</label>
+              <label>Official Email Address <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="email"
                 name="emailAddress"
@@ -208,17 +214,20 @@ export default function TranscriptForm({ onSuccess, standalone = true }: Transcr
         </div>
 
         {/* Section 3: Destination Address */}
-        <div className="p-3.5 sm:p-5 rounded-xl bg-slate-50 border border-slate-200/80">
-          <div className="flex items-center gap-2 mb-3.5 pb-2 border-b border-slate-200">
-            <Building size={18} className="text-blue-600 shrink-0" />
-            <h3 className="text-xs font-extrabold text-slate-800 uppercase tracking-wider">
-              3. Destination Institution & Dispatch
-            </h3>
+        <div className="form-section-card">
+          <div className="form-section-header">
+            <div className="form-section-icon">
+              <Building size={18} />
+            </div>
+            <div>
+              <h3 className="form-section-title">3. Destination Institution & Dispatch</h3>
+              <p className="text-xs text-slate-500">Where the official sealed or digital transcript will be delivered</p>
+            </div>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-4">
             <div>
-              <label>Recipient Institution / Organization *</label>
+              <label>Recipient Institution / Organization <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="institutionName"
@@ -229,7 +238,7 @@ export default function TranscriptForm({ onSuccess, standalone = true }: Transcr
               />
             </div>
             <div>
-              <label>Full Postal / Courier Delivery Address *</label>
+              <label>Full Postal / Courier Delivery Address <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="address"
@@ -243,15 +252,18 @@ export default function TranscriptForm({ onSuccess, standalone = true }: Transcr
         </div>
 
         {/* Section 4: Remita & Verification Keys */}
-        <div className="p-3.5 sm:p-5 rounded-xl bg-slate-50 border border-slate-200/80">
-          <div className="flex items-center gap-2 mb-3.5 pb-2 border-b border-slate-200">
-            <CreditCard size={18} className="text-blue-600 shrink-0" />
-            <h3 className="text-xs font-extrabold text-slate-800 uppercase tracking-wider">
-              4. Payment & Verification Keys (Optional)
-            </h3>
+        <div className="form-section-card">
+          <div className="form-section-header">
+            <div className="form-section-icon">
+              <CreditCard size={18} />
+            </div>
+            <div>
+              <h3 className="form-section-title">4. Payment & Verification Keys (Optional)</h3>
+              <p className="text-xs text-slate-500">Provide existing reference numbers or leave blank for desk auto-generation</p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label>Remita Retrieval Reference (RRR)</label>
               <input
@@ -275,13 +287,13 @@ export default function TranscriptForm({ onSuccess, standalone = true }: Transcr
               />
             </div>
           </div>
-          <p className="text-[11px] text-slate-500 mt-2">
-            If you do not have an RRR yet, our cybercafe desk will generate and verify one automatically upon order queueing.
+          <p className="text-xs text-slate-500 mt-3">
+            ℹ️ If you do not have an RRR yet, our cybercafe desk will generate and verify one automatically upon order queueing.
           </p>
         </div>
 
         {/* Official Fee Summary Card */}
-        <div className="p-4 sm:p-5 rounded-xl bg-blue-50/70 border border-blue-200">
+        <div className="p-5 sm:p-6 rounded-2xl bg-blue-50/80 border border-blue-200">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
               <div className="flex items-center gap-2">

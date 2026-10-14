@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 
 export default function WorkspacePage() {
-  const { showToast } = useCyber();
+  const { showToast, siteSettings } = useCyber();
 
   // Registration Form State
   const [fullName, setFullName] = useState('');
@@ -113,7 +113,7 @@ export default function WorkspacePage() {
         planName: selectedPlanObj.name,
         planPrice: selectedPlanObj.price,
         deskNumber: deskCode,
-        ssid: 'BJ_SERVICES_5GHz_FIBRE',
+        ssid: siteSettings?.wifiRates?.hotspotSsid || 'BJ_SERVICES_5GHz_FIBRE',
         date: new Date().toLocaleDateString('en-GB'),
         timeSlot: 'Full Day Access (8:00 AM – 8:00 PM)'
       });
@@ -448,9 +448,9 @@ export default function WorkspacePage() {
                   />
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.85rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.35rem' }}>
+                    <label style={{ display: 'block', fontSize: '0.84rem', fontWeight: 600, color: 'var(--text-main)', marginBottom: '0.45rem' }}>
                       Phone / WhatsApp *
                     </label>
                     <input
@@ -472,7 +472,7 @@ export default function WorkspacePage() {
                   </div>
 
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.35rem' }}>
+                    <label style={{ display: 'block', fontSize: '0.84rem', fontWeight: 600, color: 'var(--text-main)', marginBottom: '0.45rem' }}>
                       Email Address
                     </label>
                     <input
@@ -493,9 +493,9 @@ export default function WorkspacePage() {
                   </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.85rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.35rem' }}>
+                    <label style={{ display: 'block', fontSize: '0.84rem', fontWeight: 600, color: 'var(--text-main)', marginBottom: '0.45rem' }}>
                       User Category
                     </label>
                     <select
@@ -519,7 +519,7 @@ export default function WorkspacePage() {
                   </div>
 
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.35rem' }}>
+                    <label style={{ display: 'block', fontSize: '0.84rem', fontWeight: 600, color: 'var(--text-main)', marginBottom: '0.45rem' }}>
                       Department / Organization
                     </label>
                     <input

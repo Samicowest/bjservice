@@ -23,8 +23,10 @@ import {
   Sparkles,
   ArrowUpDown,
   Mail,
-  Check
+  Check,
+  Layers
 } from 'lucide-react';
+import ServiceManagerView from './ServiceManagerView';
 
 export default function SuperAdminView() {
   const {
@@ -38,7 +40,7 @@ export default function SuperAdminView() {
     supabaseConfigured
   } = useCyber();
 
-  const [activeTab, setActiveTab] = useState<'users' | 'financials' | 'audit'>('users');
+  const [activeTab, setActiveTab] = useState<'users' | 'financials' | 'forms' | 'audit'>('users');
   const [userSearch, setUserSearch] = useState('');
   const [roleFilter, setRoleFilter] = useState<'all' | UserRole>('all');
   const [loadingUsers, setLoadingUsers] = useState(false);
@@ -238,6 +240,43 @@ export default function SuperAdminView() {
 
         <button
           type="button"
+          onClick={() => setActiveTab('forms')}
+          style={{
+            flex: '1 1 180px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '0.6rem',
+            padding: '0.85rem 1.25rem',
+            borderRadius: '12px',
+            fontSize: '0.9rem',
+            fontWeight: 700,
+            border: 'none',
+            cursor: 'pointer',
+            background: activeTab === 'forms' ? 'var(--primary)' : 'transparent',
+            color: activeTab === 'forms' ? '#ffffff' : 'var(--text-muted)',
+            boxShadow: activeTab === 'forms' ? 'var(--shadow-sm)' : 'none',
+            transition: 'all 0.15s ease'
+          }}
+        >
+          <Layers size={18} />
+          <span>Services & Forms Studio</span>
+          <span
+            style={{
+              fontSize: '0.72rem',
+              padding: '2px 8px',
+              borderRadius: '999px',
+              background: activeTab === 'forms' ? 'rgba(255,255,255,0.25)' : 'var(--bg-inset)',
+              color: activeTab === 'forms' ? '#ffffff' : 'var(--text-main)',
+              fontWeight: 800
+            }}
+          >
+            {services.length}
+          </span>
+        </button>
+
+        <button
+          type="button"
           onClick={() => setActiveTab('audit')}
           style={{
             flex: '1 1 180px',
@@ -273,6 +312,9 @@ export default function SuperAdminView() {
           </span>
         </button>
       </div>
+
+      {/* TAB: SERVICES & FORMS STUDIO */}
+      {activeTab === 'forms' && <ServiceManagerView />}
 
       {/* TAB 1: USER MANAGEMENT & ROLE PERMISSIONS */}
       {activeTab === 'users' && (

@@ -170,3 +170,46 @@ export interface AppNotification {
   read: boolean;
   targetRole?: UserRole;
 }
+
+export interface SiteSettings {
+  brandName: string;
+  tagline: string;
+  location: string;
+  heroBadge: string;
+  heroBadgeMobile: string;
+  showTicker: boolean;
+  announcementTicker: string;
+  urgentBulletin: {
+    active: boolean;
+    title: string;
+    message: string;
+    type: 'info' | 'warning' | 'alert' | 'success';
+    badge?: string;
+  };
+  bankDetails: {
+    bankName: string;
+    accountNumber: string;
+    accountName: string;
+    alternativeBank: string;
+    allowTransfer: boolean;
+    allowCashAtCounter: boolean;
+    paymentInstructions: string;
+  };
+  wifiRates: {
+    oneHour: number;
+    fourHours: number;
+    twentyFourHours: number;
+    hotspotSsid: string;
+    speed: string;
+    generatorStatus: string;
+    isHotspotActive: boolean;
+  };
+  contact: {
+    primaryPhone: string;
+    secondaryPhone: string;
+    whatsapp: string;
+    email: string;
+    address: string;
+    openingHours: string;
+  };
+}

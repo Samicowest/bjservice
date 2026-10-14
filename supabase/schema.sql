@@ -119,6 +119,8 @@ create trigger on_auth_user_created
 
 -- ============================================================
 -- 6. Helper: Ensure Super Admin Account is Activated (Amos Ayinla)
+-- Note: Direct insert into auth.users requires token fields to not be NULL,
+-- otherwise Supabase GoTrue throws "500: Database error querying schema" (converting NULL to string).
 do $$
 begin
   if not exists (select 1 from auth.users where lower(email) = 'bjservicesworkspace@gmail.com') then
@@ -133,7 +135,15 @@ begin
       created_at,
       updated_at,
       role,
-      aud
+      aud,
+      confirmation_token,
+      recovery_token,
+      email_change_token_new,
+      email_change,
+      phone_change,
+      phone_change_token,
+      email_change_token_current,
+      reauthentication_token
     ) values (
       gen_random_uuid(),
       '00000000-0000-0000-0000-000000000000',
@@ -145,10 +155,31 @@ begin
       now(),
       now(),
       'authenticated',
-      'authenticated'
+      'authenticated',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      ''
     );
   end if;
 end $$;
+
+-- Repair any existing NULL token columns if inserted manually
+update auth.users
+set 
+  confirmation_token = coalesce(confirmation_token, ''),
+  recovery_token = coalesce(recovery_token, ''),
+  email_change_token_new = coalesce(email_change_token_new, ''),
+  email_change = coalesce(email_change, ''),
+  phone_change = coalesce(phone_change, ''),
+  phone_change_token = coalesce(phone_change_token, ''),
+  email_change_token_current = coalesce(email_change_token_current, ''),
+  reauthentication_token = coalesce(reauthentication_token, '')
+where lower(email) = 'bjservicesworkspace@gmail.com';
 
 update public.profiles 
 set role = 'super_admin', badge = 'Executive Suite', full_name = 'Amos Ayinla' 

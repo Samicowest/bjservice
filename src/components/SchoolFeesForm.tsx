@@ -68,11 +68,11 @@ export default function SchoolFeesForm({ onSuccess, standalone = true }: SchoolF
   ];
 
   return (
-    <div className={standalone ? "official-form-container max-w-3xl mx-auto p-4 sm:p-6 md:p-8 bg-white shadow-xl rounded-2xl border border-slate-200 w-full" : "w-full"}>
+    <div className={standalone ? "official-form-container max-w-3xl mx-auto p-5 sm:p-7 md:p-9 bg-white shadow-xl rounded-2xl border border-slate-200 w-full" : "w-full"}>
       {/* Header Badge */}
       {standalone && (
-        <div className="text-center mb-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold uppercase tracking-wider mb-2">
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold uppercase tracking-wider mb-2.5">
             <ShieldCheck size={14} className="text-emerald-600" />
             <span>BJ Services • Official FUTO Portal Clearance Desk</span>
           </div>
@@ -85,13 +85,13 @@ export default function SchoolFeesForm({ onSuccess, standalone = true }: SchoolF
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-6">
         {/* Category Selector Pills */}
-        <div className="p-3.5 sm:p-5 rounded-xl bg-slate-50 border border-slate-200/80">
-          <label className="text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-2.5 block">
-            Academic Category / Degree Level
+        <div className="form-section-card">
+          <label className="text-sm font-bold text-slate-800 mb-3 block">
+            Academic Category / Degree Level <span className="text-red-500">*</span>
           </label>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
             {categories.map((cat) => {
               const active = formData.category === cat.id;
               return (
@@ -99,10 +99,10 @@ export default function SchoolFeesForm({ onSuccess, standalone = true }: SchoolF
                   type="button"
                   key={cat.id}
                   onClick={() => setFormData({ ...formData, category: cat.id })}
-                  className={`py-2.5 px-2.5 rounded-xl text-xs font-bold transition-all text-center border cursor-pointer ${
+                  className={`py-3 px-3 rounded-xl text-xs font-bold transition-all text-center border cursor-pointer ${
                     active
                       ? 'bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-500/20'
-                      : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-100'
+                      : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
                   }`}
                 >
                   {cat.label}
@@ -113,17 +113,20 @@ export default function SchoolFeesForm({ onSuccess, standalone = true }: SchoolF
         </div>
 
         {/* Section 1: Student Identity & Faculty */}
-        <div className="p-3.5 sm:p-5 rounded-xl bg-slate-50 border border-slate-200/80">
-          <div className="flex items-center gap-2 mb-3.5 pb-2 border-b border-slate-200">
-            <GraduationCap size={18} className="text-blue-600 shrink-0" />
-            <h3 className="text-xs font-extrabold text-slate-800 uppercase tracking-wider">
-              1. Student Identity & Faculty
-            </h3>
+        <div className="form-section-card">
+          <div className="form-section-header">
+            <div className="form-section-icon" style={{ background: '#f0fdf4', color: '#16a34a' }}>
+              <GraduationCap size={18} />
+            </div>
+            <div>
+              <h3 className="form-section-title">1. Student Identity & Faculty</h3>
+              <p className="text-xs text-slate-500">Provide personal profile as recorded on the FUTO student portal</p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
             <div>
-              <label>Surname *</label>
+              <label>Surname <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="surname"
@@ -134,7 +137,7 @@ export default function SchoolFeesForm({ onSuccess, standalone = true }: SchoolF
               />
             </div>
             <div>
-              <label>Other Names *</label>
+              <label>Other Names <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="otherNames"
@@ -146,9 +149,9 @@ export default function SchoolFeesForm({ onSuccess, standalone = true }: SchoolF
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <label>School / Faculty *</label>
+              <label>School / Faculty <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="school"
@@ -159,7 +162,7 @@ export default function SchoolFeesForm({ onSuccess, standalone = true }: SchoolF
               />
             </div>
             <div>
-              <label>Department *</label>
+              <label>Department <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="dept"
@@ -170,7 +173,7 @@ export default function SchoolFeesForm({ onSuccess, standalone = true }: SchoolF
               />
             </div>
             <div>
-              <label>Current Level *</label>
+              <label>Current Level <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="level"
@@ -184,17 +187,20 @@ export default function SchoolFeesForm({ onSuccess, standalone = true }: SchoolF
         </div>
 
         {/* Section 2: FUTO Portal & Matric Records */}
-        <div className="p-3.5 sm:p-5 rounded-xl bg-slate-50 border border-slate-200/80">
-          <div className="flex items-center gap-2 mb-3.5 pb-2 border-b border-slate-200">
-            <Lock size={18} className="text-blue-600 shrink-0" />
-            <h3 className="text-xs font-extrabold text-slate-800 uppercase tracking-wider">
-              2. FUTO Portal & Academic Registration
-            </h3>
+        <div className="form-section-card">
+          <div className="form-section-header">
+            <div className="form-section-icon" style={{ background: '#f0fdf4', color: '#16a34a' }}>
+              <Lock size={18} />
+            </div>
+            <div>
+              <h3 className="form-section-title">2. FUTO Portal & Academic Registration</h3>
+              <p className="text-xs text-slate-500">Portal credentials to authenticate course registration clearance</p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
             <div>
-              <label>Session You Want to Pay *</label>
+              <label>Session You Want to Pay <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="session"
@@ -205,7 +211,7 @@ export default function SchoolFeesForm({ onSuccess, standalone = true }: SchoolF
               />
             </div>
             <div>
-              <label>Matric No. / JAMB Reg. No. *</label>
+              <label>Matric No. / JAMB Reg. No. <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="matricOrJambNo"
@@ -218,10 +224,10 @@ export default function SchoolFeesForm({ onSuccess, standalone = true }: SchoolF
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
             <div>
               <label>
-                Application No. <span className="text-slate-400 font-normal lowercase">(PG / JUPEB only)</span>
+                Application No. <span className="text-slate-400 font-normal">(PG / JUPEB only)</span>
               </label>
               <input
                 type="text"
@@ -234,7 +240,7 @@ export default function SchoolFeesForm({ onSuccess, standalone = true }: SchoolF
             </div>
 
             <div>
-              <label>FUTO Portal Password *</label>
+              <label>FUTO Portal Password <span className="text-red-500 font-bold">*</span></label>
               <div className="relative">
                 <input
                   type={showPassword ? 'text' : 'password'}
@@ -255,9 +261,9 @@ export default function SchoolFeesForm({ onSuccess, standalone = true }: SchoolF
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label>Mobile Number (SMS Alert) *</label>
+              <label>Mobile Number (SMS Alert) <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="tel"
                 name="mobileNo"
@@ -268,7 +274,7 @@ export default function SchoolFeesForm({ onSuccess, standalone = true }: SchoolF
               />
             </div>
             <div>
-              <label>Submission Date *</label>
+              <label>Submission Date <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="date"
                 name="date"
@@ -281,17 +287,20 @@ export default function SchoolFeesForm({ onSuccess, standalone = true }: SchoolF
         </div>
 
         {/* Section 3: Remita & Payment Invoice */}
-        <div className="p-3.5 sm:p-5 rounded-xl bg-slate-50 border border-slate-200/80">
-          <div className="flex items-center gap-2 mb-3.5 pb-2 border-b border-slate-200">
-            <CreditCard size={18} className="text-blue-600 shrink-0" />
-            <h3 className="text-xs font-extrabold text-slate-800 uppercase tracking-wider">
-              3. Remita Billing & Payment Information
-            </h3>
+        <div className="form-section-card">
+          <div className="form-section-header">
+            <div className="form-section-icon" style={{ background: '#f0fdf4', color: '#16a34a' }}>
+              <CreditCard size={18} />
+            </div>
+            <div>
+              <h3 className="form-section-title">3. Remita Billing & Payment Information</h3>
+              <p className="text-xs text-slate-500">Provide generated Remita Retrieval Reference or billing amount</p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <label>Invoice Amount (₦) *</label>
+              <label>Invoice Amount (₦) <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="number"
                 name="amount"
@@ -303,7 +312,7 @@ export default function SchoolFeesForm({ onSuccess, standalone = true }: SchoolF
               />
             </div>
             <div>
-              <label>Remita RRR *</label>
+              <label>Remita RRR <span className="text-red-500 font-bold">*</span></label>
               <input
                 type="text"
                 name="rrr"
@@ -329,8 +338,8 @@ export default function SchoolFeesForm({ onSuccess, standalone = true }: SchoolF
         </div>
 
         {/* Digital Front Desk Audit Verification Badge */}
-        <div className="p-3.5 sm:p-4 rounded-xl bg-slate-100 border border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-slate-600">
-          <div className="flex items-center gap-2.5">
+        <div className="p-4 sm:p-5 rounded-xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-slate-600 mb-6">
+          <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center shrink-0">
               <CheckCircle2 size={18} />
             </div>
@@ -338,18 +347,18 @@ export default function SchoolFeesForm({ onSuccess, standalone = true }: SchoolF
               <div className="font-bold text-slate-900 uppercase tracking-wide">
                 Digital Registry Verification Switch
               </div>
-              <div className="text-[11px] text-slate-500">
+              <div className="text-xs text-slate-500 mt-0.5">
                 Auto-assigned to front desk operator with electronic receipt stamping upon payment confirmation.
               </div>
             </div>
           </div>
-          <span className="shrink-0 bg-slate-200 text-slate-700 font-mono text-[10px] font-bold px-2.5 py-1 rounded-md">
+          <span className="shrink-0 bg-slate-100 text-slate-700 font-mono text-[10px] font-bold px-2.5 py-1 rounded-md border border-slate-200">
             FUTO-PORTAL-V3
           </span>
         </div>
 
         {/* Official Fee Summary */}
-        <div className="p-4 sm:p-5 rounded-xl bg-emerald-50/70 border border-emerald-200">
+        <div className="p-5 sm:p-6 rounded-2xl bg-emerald-50/80 border border-emerald-200 mb-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
               <div className="flex items-center gap-2">
