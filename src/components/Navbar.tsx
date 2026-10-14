@@ -118,25 +118,10 @@ export default function Navbar() {
           >
             BJ
           </div>
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-              <span style={{ fontSize: '1.25rem', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--text-main)' }}>
-                BJ<span style={{ color: 'var(--primary)' }}>Services</span>
-              </span>
-              <span
-                style={{
-                  fontSize: '0.68rem',
-                  padding: '0.15rem 0.45rem',
-                  background: 'var(--accent-orange-light)',
-                  color: 'var(--accent-orange)',
-                  borderRadius: '4px',
-                  border: '1px solid var(--accent-orange-glow)',
-                  fontWeight: 700
-                }}
-              >
-                FUTO HUB
-              </span>
-            </div>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <span style={{ fontSize: '1.25rem', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--text-main)' }}>
+              BJ<span style={{ color: 'var(--primary)' }}>Services</span>
+            </span>
           </div>
         </Link>
 
@@ -185,45 +170,43 @@ export default function Navbar() {
         {/* Action Controls & User Account Menu */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
           
-          {/* Notification Bell (Visible when logged in) */}
-          {isLoggedIn && (
-            <div style={{ position: 'relative' }}>
-              <button
-                onClick={() => setActiveModal('notifications')}
-                className="btn btn-secondary btn-sm"
-                style={{ padding: '0.5rem', borderRadius: '8px', position: 'relative' }}
-                aria-label="View notifications"
-              >
-                <Bell size={17} />
-                {unreadNotificationCount > 0 && (
-                  <span
-                    style={{
-                      position: 'absolute',
-                      top: '-4px',
-                      right: '-4px',
-                      background: '#f43f5e',
-                      color: 'white',
-                      fontSize: '0.65rem',
-                      fontWeight: 800,
-                      width: '18px',
-                      height: '18px',
-                      borderRadius: '50%',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      boxShadow: '0 0 10px rgba(244, 63, 94, 0.6)'
-                    }}
-                  >
-                    {unreadNotificationCount}
-                  </span>
-                )}
-              </button>
-            </div>
-          )}
+          {/* Notification Bell */}
+          <div style={{ position: 'relative' }}>
+            <button
+              onClick={() => setActiveModal('notifications')}
+              className="btn btn-secondary btn-sm"
+              style={{ padding: '0.5rem', borderRadius: '8px', position: 'relative' }}
+              aria-label="View notifications"
+            >
+              <Bell size={17} />
+              {unreadNotificationCount > 0 && (
+                <span
+                  style={{
+                    position: 'absolute',
+                    top: '-4px',
+                    right: '-4px',
+                    background: '#f43f5e',
+                    color: 'white',
+                    fontSize: '0.65rem',
+                    fontWeight: 800,
+                    width: '18px',
+                    height: '18px',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: '0 0 10px rgba(244, 63, 94, 0.6)'
+                  }}
+                >
+                  {unreadNotificationCount}
+                </span>
+              )}
+            </button>
+          </div>
 
-          {/* User Profile / Sign In Button & Clean Dropdown */}
+          {/* User Profile / Sign In Button & Clean Dropdown (Desktop Only) */}
           {isLoggedIn && currentUser ? (
-            <div style={{ position: 'relative' }} ref={dropdownRef}>
+            <div style={{ position: 'relative' }} ref={dropdownRef} className="hide-mobile">
               <button
                 onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
                 style={{
@@ -419,7 +402,47 @@ export default function Navbar() {
 
             {/* Mobile Account / Dashboard Shortcuts */}
             {isLoggedIn && currentUser ? (
-              <div style={{ borderTop: '1px solid var(--border-subtle)', marginTop: '0.5rem', paddingTop: '0.5rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+              <div style={{ borderTop: '1px solid var(--border-subtle)', marginTop: '0.5rem', paddingTop: '0.75rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.4rem 0.65rem', background: 'var(--bg-inset)', borderRadius: '10px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                    <div style={{ width: '34px', height: '34px', borderRadius: '50%', background: 'var(--bg-card)', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid var(--border-subtle)', overflow: 'hidden' }}>
+                      {currentUser.avatar?.startsWith('http') || currentUser.avatar?.startsWith('/') ? (
+                        <img src={currentUser.avatar} alt={currentUser.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      ) : (
+                        <span style={{ fontSize: '1rem' }}>{currentUser.avatar || '👤'}</span>
+                      )}
+                    </div>
+                    <div>
+                      <div style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--text-main)', lineHeight: 1.2 }}>{currentUser.name}</div>
+                      <div style={{ fontSize: '0.72rem', color: 'var(--primary)', fontWeight: 600 }}>{currentUser.title || currentUser.badge}</div>
+                    </div>
+                  </div>
+                  {unreadNotificationCount > 0 && (
+                    <button
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        setActiveModal('notifications');
+                      }}
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.35rem',
+                        padding: '0.25rem 0.6rem',
+                        borderRadius: '9999px',
+                        background: '#fef2f2',
+                        color: '#ef4444',
+                        border: '1px solid #fecaca',
+                        fontSize: '0.74rem',
+                        fontWeight: 700,
+                        cursor: 'pointer'
+                      }}
+                    >
+                      <Bell size={13} />
+                      <span>{unreadNotificationCount}</span>
+                    </button>
+                  )}
+                </div>
+
                 <Link
                   href={getDashboardHref()}
                   onClick={() => setMobileMenuOpen(false)}
@@ -439,22 +462,21 @@ export default function Navbar() {
                   }}
                 >
                   <Briefcase size={14} />
-                  <span>My Dashboard ({getDashboardLabel()})</span>
+                  <span>Open {getDashboardLabel()}</span>
                 </Link>
-                <div>
-                  <button
-                    onClick={() => {
-                      setMobileMenuOpen(false);
-                      logout();
-                      router.push('/');
-                    }}
-                    className="btn btn-sm"
-                    style={{ width: '100%', justifyContent: 'center', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', border: '1px solid rgba(239, 68, 68, 0.2)' }}
-                  >
-                    <LogOut size={14} />
-                    <span>Sign Out</span>
-                  </button>
-                </div>
+
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    logout();
+                    router.push('/');
+                  }}
+                  className="btn btn-sm"
+                  style={{ width: '100%', justifyContent: 'center', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', border: '1px solid rgba(239, 68, 68, 0.2)' }}
+                >
+                  <LogOut size={14} />
+                  <span>Sign Out</span>
+                </button>
               </div>
             ) : (
               <div style={{ borderTop: '1px solid var(--border-subtle)', marginTop: '0.5rem', paddingTop: '0.5rem' }}>

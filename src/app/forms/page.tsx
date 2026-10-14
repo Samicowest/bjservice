@@ -21,7 +21,6 @@ import {
   ArrowRight,
   ChevronRight,
   Printer,
-  Sparkles,
   Search
 } from 'lucide-react';
 
@@ -166,68 +165,7 @@ function FormsContent() {
         </div>
       </div>
 
-      {/* Form Selection Navigation Bar */}
-      <div
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'center',
-          gap: '0.5rem',
-          borderBottom: '1px solid var(--border-subtle)',
-          marginBottom: '2rem',
-          paddingBottom: '0.75rem'
-        }}
-      >
-        <button
-          onClick={() => selectForm('overview')}
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.45rem',
-            padding: '0.55rem 1.15rem',
-            borderRadius: '9999px',
-            fontSize: '0.82rem',
-            fontWeight: 700,
-            cursor: 'pointer',
-            border: activeForm === 'overview' ? '1.5px solid var(--primary)' : '1px solid var(--border-subtle)',
-            background: activeForm === 'overview' ? 'var(--primary-light)' : 'var(--bg-card)',
-            color: activeForm === 'overview' ? 'var(--primary)' : 'var(--text-muted)',
-            boxShadow: activeForm === 'overview' ? '0 2px 8px var(--primary-glow)' : 'var(--shadow-sm)'
-          }}
-        >
-          <Sparkles size={14} />
-          <span>All 5 Official Forms</span>
-        </button>
 
-        {formCards.map((form) => {
-          const isCurrent = activeForm === form.id;
-          const Icon = form.icon;
-          return (
-            <button
-              key={form.id}
-              onClick={() => selectForm(form.id)}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.45rem',
-                padding: '0.55rem 1.15rem',
-                borderRadius: '9999px',
-                fontSize: '0.82rem',
-                fontWeight: 700,
-                cursor: 'pointer',
-                border: isCurrent ? '1.5px solid var(--primary)' : '1px solid var(--border-subtle)',
-                background: isCurrent ? 'var(--primary-light)' : 'var(--bg-card)',
-                color: isCurrent ? 'var(--primary)' : 'var(--text-muted)',
-                boxShadow: isCurrent ? '0 2px 8px var(--primary-glow)' : 'var(--shadow-sm)',
-                transition: 'var(--transition)'
-              }}
-            >
-              <Icon size={14} color={isCurrent ? 'var(--primary)' : 'currentColor'} />
-              <span>{form.title.replace('FUTO ', '')}</span>
-            </button>
-          );
-        })}
-      </div>
 
       {/* Success Notification Banner if form just submitted */}
       {lastSubmittedTask && (
